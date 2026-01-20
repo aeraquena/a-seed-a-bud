@@ -19,7 +19,17 @@ export default async function Home() {
     revalidatePath("/");
   }
 
-  const plants = await prisma.plant.findMany();
+  const plants = await prisma.plant.findMany({
+    include: {
+      events: {
+        orderBy: { date: "desc" },
+        take: 1,
+        select: {
+          date: true,
+        },
+      },
+    },
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
@@ -44,6 +54,7 @@ export default async function Home() {
               >
                 Water
               </button>
+              <span>Last watered: {plant.events[0]?.date.toUTCString()}</span>
             </form>
           </li>
         ))}
