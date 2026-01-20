@@ -21,7 +21,7 @@ export default function NewPlant() {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Create New Plant</h1>
+      <h1 className="text-2xl font-bold mb-6">Add New Plant</h1>
       <Form action={createPlant} className="space-y-6">
         <div>
           <label htmlFor="title" className="block text-lg mb-2">
@@ -37,7 +37,7 @@ export default function NewPlant() {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600"
+          className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
         >
           Create Plant
         </button>

@@ -57,7 +57,7 @@ export default async function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center mt-8">
       <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)] text-[#333333]">
         A Seed! A Bud!
       </h1>
@@ -100,6 +100,11 @@ export default async function Home() {
           </li>
         ))}
       </ul>
+      <Link href={{ pathname: "/plants/new " }}>
+        <button className="m-4 px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition duration-150">
+          + Add new plant
+        </button>
+      </Link>
     </div>
   );
 }
