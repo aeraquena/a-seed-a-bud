@@ -16,7 +16,7 @@ export default function NewPost() {
     });
 
     revalidatePath("/plants");
-    redirect("/plants");
+    redirect("/");
   }
 
   return (
