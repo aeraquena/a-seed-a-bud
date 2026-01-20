@@ -19,6 +19,30 @@ export default async function Home() {
     revalidatePath("/");
   }
 
+  function getWateringColor(lastWatered: Date | null): string {
+    if (!lastWatered) return "rgb(255, 255, 255)"; // white if never watered
+
+    const daysSince = Math.floor(
+      (new Date().getTime() - lastWatered.getTime()) / (1000 * 60 * 60 * 24),
+    );
+
+    // Define your thresholds
+    const maxDays = 20; // Fully white after 20 days
+
+    if (daysSince >= maxDays) return "rgb(255, 255, 255)"; // white
+    if (daysSince <= 0) return "rgb(34, 197, 94)"; // green-500
+
+    // Interpolate from green to white
+    const ratio = daysSince / maxDays;
+
+    // Green (34, 197, 94) → White (255, 255, 255)
+    const r = Math.round(34 + (255 - 34) * ratio);
+    const g = Math.round(197 + (255 - 197) * ratio);
+    const b = Math.round(94 + (255 - 94) * ratio);
+
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
   const plants = await prisma.plant.findMany({
     include: {
       events: {
@@ -40,6 +64,15 @@ export default async function Home() {
         {plants.map((plant) => (
           <li key={plant.id} className="mb-2">
             <form action={waterPlant}>
+              <div
+                style={{
+                  backgroundColor: getWateringColor(plant.events[0]?.date),
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "50%",
+                  display: "inline-block",
+                }}
+              />
               <Link
                 href={{ pathname: "/plants/" + plant.id }}
                 className="font-semibold m-4"
