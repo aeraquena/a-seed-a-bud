@@ -78,7 +78,7 @@ export default async function Home() {
                 href={{ pathname: "/plants/" + plant.id }}
                 className="font-semibold m-4"
               >
-                {plant.name}
+                <div className="w-64 inline-block">{plant.name}</div>
               </Link>
               <input type="hidden" name="plantId" value={plant.id}></input>
               <input type="date" name="date" className="m-4" />
