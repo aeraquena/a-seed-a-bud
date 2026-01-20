@@ -3,7 +3,7 @@ import prisma from "@/../lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default function NewPost() {
+export default function NewPlant() {
   async function createPlant(formData: FormData) {
     "use server";
 
@@ -15,7 +15,7 @@ export default function NewPost() {
       },
     });
 
-    revalidatePath("/plants");
+    revalidatePath("/");
     redirect("/");
   }
 
