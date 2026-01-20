@@ -596,7 +596,8 @@ export const PlantScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  name: 'name'
+  name: 'name',
+  index: 'index'
 } as const
 
 export type PlantScalarFieldEnum = (typeof PlantScalarFieldEnum)[keyof typeof PlantScalarFieldEnum]
@@ -627,6 +628,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 

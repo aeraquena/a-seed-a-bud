@@ -23,13 +23,31 @@ export default async function Post({
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
       <h1 className="text-4xl font-bold mb-8 text-[#333333]">{plant.name}</h1>
-      <p>Created at {new Date(plant.createdAt).toString()}</p>
-      <p>Updated at {new Date(plant.updatedAt).toString()}</p>
+      <p>
+        Created on{" "}
+        {new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(plant.createdAt)}
+      </p>
+      <p>
+        Updated on{" "}
+        {new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(plant.updatedAt)}
+      </p>
       <h2 className="text-2xl font-bold m-8 text-[#333333]">Waterings</h2>
       <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
         {plant.events.map((event) => (
           <li key={event.id} className="mb-2">
-            {event.date.toString()}
+            {new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            }).format(event.date)}
           </li>
         ))}
       </ul>

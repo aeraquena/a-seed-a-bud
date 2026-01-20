@@ -19,6 +19,7 @@ model Plant {
   updatedAt DateTime @updatedAt
   name      String
   events    Event[]
+  index     Int?      
 }
 
 model Event {

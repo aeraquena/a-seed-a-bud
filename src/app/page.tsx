@@ -44,6 +44,7 @@ export default async function Home() {
   }
 
   const plants = await prisma.plant.findMany({
+    //orderBy: { index: { sort: "asc", nulls: "last" } },
     include: {
       events: {
         orderBy: { date: "desc" },
@@ -87,7 +88,14 @@ export default async function Home() {
               >
                 Water
               </button>
-              <span>Last watered: {plant.events[0]?.date.toString()}</span>
+              <span>
+                Last:{" "}
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }).format(plant.events[0]?.date)}
+              </span>
             </form>
           </li>
         ))}
