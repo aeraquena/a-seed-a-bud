@@ -5,11 +5,14 @@ import { revalidatePath } from "next/cache";
 export default async function Home() {
   async function waterPlant(formData: FormData) {
     "use server";
-    console.log("watered plant ", formData.get("plantId"));
 
-    /*await prisma.event.create({
-      data: {},
-    });*/
+    const plantId = Number(formData.get("plantId"));
+
+    await prisma.event.create({
+      data: {
+        plantId,
+      },
+    });
 
     revalidatePath("/");
   }
