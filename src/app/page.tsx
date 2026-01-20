@@ -54,7 +54,7 @@ export default async function Home() {
               >
                 Water
               </button>
-              <span>Last watered: {plant.events[0]?.date.toUTCString()}</span>
+              <span>Last watered: {plant.events[0]?.date.toString()}</span>
             </form>
           </li>
         ))}
