@@ -15,6 +15,22 @@ datasource db {
 
 enum EventType {
   WATER
+  REPOT
+}
+
+enum PotMaterial {
+  PLASTIC
+  CERAMIC
+  TERRACOTTA
+  GLASS
+  OTHER
+}
+
+enum Substrate {
+  SOIL
+  SOIL_WITH_DRAINAGE
+  SPHAGNUM_MOSS
+  WATER
 }
 
 model Plant {
@@ -30,6 +46,13 @@ model Plant {
   propagation Boolean  @default(false)
   speciesId   Int?
   species     Species? @relation(fields: [speciesId], references: [id])
+  potSize     Int?
+  potMaterial PotMaterial?
+  substrate   Substrate?
+  source      String?
+  dateAcquired  DateTime?
+  cost        Int?
+  alive       Boolean @default(true)
 }
 
 model Event {
