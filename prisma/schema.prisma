@@ -71,6 +71,7 @@ model Site {
   updatedAt DateTime @updatedAt
   name      String
   plants    Plant[]
+  index     Int
 }
 
 model Species {

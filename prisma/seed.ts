@@ -23,9 +23,67 @@ const plantData = [
   },
 ];
 
+const siteData = [
+  {
+    name: "Bedroom (Dresser)",
+    index: 0,
+  },
+  {
+    name: "Bedroom (Right Window)",
+    index: 1,
+  },
+  {
+    name: "Bedroom (Left Window)",
+    index: 2,
+  },
+  {
+    name: "Greenhouse (Shelf 1)",
+    index: 3,
+  },
+  {
+    name: "Greenhouse (Shelf 2)",
+    index: 4,
+  },
+  {
+    name: "Greenhouse (Shelf 3)",
+    index: 5,
+  },
+  {
+    name: "Living Room (Left Window)",
+    index: 6,
+  },
+  {
+    name: "Living Room (Right Window)",
+    index: 7,
+  },
+  {
+    name: "Living Room (Indirect)",
+    index: 8,
+  },
+  {
+    name: "Living Room (Shelf 4)",
+    index: 9,
+  },
+  {
+    name: "Living Room (Shelf 3)",
+    index: 9,
+  },
+  {
+    name: "Living Room (Shelf 2)",
+    index: 10,
+  },
+  {
+    name: "Living Room (Shelf 1)",
+    index: 11,
+  },
+]
+
 export async function main() {
   for (const p of plantData) {
-    await prisma.plant.create({ data: p });
+    await prisma.plant.upsert({ data: p });
+  }
+  for (const s of siteData) {
+    await prisma.site.upsert({ data: s });
   }
 }
 
