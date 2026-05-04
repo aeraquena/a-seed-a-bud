@@ -63,13 +63,13 @@ export default async function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-gray-50 pt-8">
-      <h1 className="mb-8 font-[family-name:var(--font-geist-sans)] text-4xl font-bold text-[#333333]">
+      <h1 className="mb-8 font-(family-name:--font-geist-sans) text-4xl font-bold text-[#333333]">
         A Seed! A Bud!
       </h1>
-      <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
+      <ul className="list-inside font-(family-name:--font-geist-sans)">
         {sites.map((site) => (
           <div key={site.id}>
-            <h2 className="font-bold">{site.name}</h2>
+            <h2 className="mb-4 text-2xl font-bold">{site.name}</h2>
             {site.plants.map((plant) => (
               <li key={plant.id} className="mb-2">
                 <form action={waterPlant}>
