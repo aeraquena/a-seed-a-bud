@@ -385,7 +385,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Plant: 'Plant',
-  Event: 'Event'
+  Event: 'Event',
+  Site: 'Site',
+  Species: 'Species',
+  Genus: 'Genus'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "plant" | "event"
+    modelProps: "plant" | "event" | "site" | "species" | "genus"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +556,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Site: {
+      payload: Prisma.$SitePayload<ExtArgs>
+      fields: Prisma.SiteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SiteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SiteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        findFirst: {
+          args: Prisma.SiteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SiteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        findMany: {
+          args: Prisma.SiteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>[]
+        }
+        create: {
+          args: Prisma.SiteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        createMany: {
+          args: Prisma.SiteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SiteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>[]
+        }
+        delete: {
+          args: Prisma.SiteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        update: {
+          args: Prisma.SiteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        deleteMany: {
+          args: Prisma.SiteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SiteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SiteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>[]
+        }
+        upsert: {
+          args: Prisma.SiteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SitePayload>
+        }
+        aggregate: {
+          args: Prisma.SiteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSite>
+        }
+        groupBy: {
+          args: Prisma.SiteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SiteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteCountAggregateOutputType> | number
+        }
+      }
+    }
+    Species: {
+      payload: Prisma.$SpeciesPayload<ExtArgs>
+      fields: Prisma.SpeciesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpeciesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpeciesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        findFirst: {
+          args: Prisma.SpeciesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpeciesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        findMany: {
+          args: Prisma.SpeciesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>[]
+        }
+        create: {
+          args: Prisma.SpeciesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        createMany: {
+          args: Prisma.SpeciesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SpeciesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>[]
+        }
+        delete: {
+          args: Prisma.SpeciesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        update: {
+          args: Prisma.SpeciesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpeciesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpeciesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SpeciesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>[]
+        }
+        upsert: {
+          args: Prisma.SpeciesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpeciesPayload>
+        }
+        aggregate: {
+          args: Prisma.SpeciesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpecies>
+        }
+        groupBy: {
+          args: Prisma.SpeciesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpeciesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpeciesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpeciesCountAggregateOutputType> | number
+        }
+      }
+    }
+    Genus: {
+      payload: Prisma.$GenusPayload<ExtArgs>
+      fields: Prisma.GenusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GenusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GenusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        findFirst: {
+          args: Prisma.GenusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GenusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        findMany: {
+          args: Prisma.GenusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>[]
+        }
+        create: {
+          args: Prisma.GenusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        createMany: {
+          args: Prisma.GenusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GenusCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>[]
+        }
+        delete: {
+          args: Prisma.GenusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        update: {
+          args: Prisma.GenusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        deleteMany: {
+          args: Prisma.GenusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GenusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GenusUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>[]
+        }
+        upsert: {
+          args: Prisma.GenusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GenusPayload>
+        }
+        aggregate: {
+          args: Prisma.GenusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGenus>
+        }
+        groupBy: {
+          args: Prisma.GenusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GenusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GenusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GenusCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -597,7 +822,18 @@ export const PlantScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   name: 'name',
-  index: 'index'
+  index: 'index',
+  health: 'health',
+  siteId: 'siteId',
+  propagation: 'propagation',
+  speciesId: 'speciesId',
+  potSize: 'potSize',
+  potMaterial: 'potMaterial',
+  substrate: 'substrate',
+  source: 'source',
+  dateAcquired: 'dateAcquired',
+  cost: 'cost',
+  alive: 'alive'
 } as const
 
 export type PlantScalarFieldEnum = (typeof PlantScalarFieldEnum)[keyof typeof PlantScalarFieldEnum]
@@ -608,10 +844,44 @@ export const EventScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   date: 'date',
+  type: 'type',
   plantId: 'plantId'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const SiteScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  index: 'index'
+} as const
+
+export type SiteScalarFieldEnum = (typeof SiteScalarFieldEnum)[keyof typeof SiteScalarFieldEnum]
+
+
+export const SpeciesScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  common_name: 'common_name',
+  scientific_name: 'scientific_name',
+  genusId: 'genusId'
+} as const
+
+export type SpeciesScalarFieldEnum = (typeof SpeciesScalarFieldEnum)[keyof typeof SpeciesScalarFieldEnum]
+
+
+export const GenusScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name'
+} as const
+
+export type GenusScalarFieldEnum = (typeof GenusScalarFieldEnum)[keyof typeof GenusScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -683,6 +953,55 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'PotMaterial'
+ */
+export type EnumPotMaterialFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PotMaterial'>
+    
+
+
+/**
+ * Reference to a field of type 'PotMaterial[]'
+ */
+export type ListEnumPotMaterialFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PotMaterial[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Substrate'
+ */
+export type EnumSubstrateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Substrate'>
+    
+
+
+/**
+ * Reference to a field of type 'Substrate[]'
+ */
+export type ListEnumSubstrateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Substrate[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EventType'
+ */
+export type EnumEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventType'>
+    
+
+
+/**
+ * Reference to a field of type 'EventType[]'
+ */
+export type ListEnumEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventType[]'>
     
 
 
@@ -796,6 +1115,9 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   plant?: Prisma.PlantOmit
   event?: Prisma.EventOmit
+  site?: Prisma.SiteOmit
+  species?: Prisma.SpeciesOmit
+  genus?: Prisma.GenusOmit
 }
 
 /* Types for Logging */

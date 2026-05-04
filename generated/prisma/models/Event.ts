@@ -41,6 +41,7 @@ export type EventMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   date: Date | null
+  type: $Enums.EventType | null
   plantId: number | null
 }
 
@@ -49,6 +50,7 @@ export type EventMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   date: Date | null
+  type: $Enums.EventType | null
   plantId: number | null
 }
 
@@ -57,6 +59,7 @@ export type EventCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   date: number
+  type: number
   plantId: number
   _all: number
 }
@@ -77,6 +80,7 @@ export type EventMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   date?: true
+  type?: true
   plantId?: true
 }
 
@@ -85,6 +89,7 @@ export type EventMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   date?: true
+  type?: true
   plantId?: true
 }
 
@@ -93,6 +98,7 @@ export type EventCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   date?: true
+  type?: true
   plantId?: true
   _all?: true
 }
@@ -188,6 +194,7 @@ export type EventGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   date: Date
+  type: $Enums.EventType
   plantId: number
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
@@ -219,6 +226,7 @@ export type EventWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   date?: Prisma.DateTimeFilter<"Event"> | Date | string
+  type?: Prisma.EnumEventTypeFilter<"Event"> | $Enums.EventType
   plantId?: Prisma.IntFilter<"Event"> | number
   plant?: Prisma.XOR<Prisma.PlantScalarRelationFilter, Prisma.PlantWhereInput>
 }
@@ -228,6 +236,7 @@ export type EventOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   plantId?: Prisma.SortOrder
   plant?: Prisma.PlantOrderByWithRelationInput
 }
@@ -240,6 +249,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   date?: Prisma.DateTimeFilter<"Event"> | Date | string
+  type?: Prisma.EnumEventTypeFilter<"Event"> | $Enums.EventType
   plantId?: Prisma.IntFilter<"Event"> | number
   plant?: Prisma.XOR<Prisma.PlantScalarRelationFilter, Prisma.PlantWhereInput>
 }, "id">
@@ -249,6 +259,7 @@ export type EventOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   plantId?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
@@ -265,6 +276,7 @@ export type EventScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
+  type?: Prisma.EnumEventTypeWithAggregatesFilter<"Event"> | $Enums.EventType
   plantId?: Prisma.IntWithAggregatesFilter<"Event"> | number
 }
 
@@ -272,6 +284,7 @@ export type EventCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
   plant: Prisma.PlantCreateNestedOneWithoutEventsInput
 }
 
@@ -280,6 +293,7 @@ export type EventUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
   plantId: number
 }
 
@@ -287,6 +301,7 @@ export type EventUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
   plant?: Prisma.PlantUpdateOneRequiredWithoutEventsNestedInput
 }
 
@@ -295,6 +310,7 @@ export type EventUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
   plantId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -303,6 +319,7 @@ export type EventCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
   plantId: number
 }
 
@@ -310,6 +327,7 @@ export type EventUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -317,6 +335,7 @@ export type EventUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
   plantId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -335,6 +354,7 @@ export type EventCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   plantId?: Prisma.SortOrder
 }
 
@@ -348,6 +368,7 @@ export type EventMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   plantId?: Prisma.SortOrder
 }
 
@@ -356,6 +377,7 @@ export type EventMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   plantId?: Prisma.SortOrder
 }
 
@@ -406,10 +428,15 @@ export type EventUncheckedUpdateManyWithoutPlantNestedInput = {
   deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
 }
 
+export type EnumEventTypeFieldUpdateOperationsInput = {
+  set?: $Enums.EventType
+}
+
 export type EventCreateWithoutPlantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
 }
 
 export type EventUncheckedCreateWithoutPlantInput = {
@@ -417,6 +444,7 @@ export type EventUncheckedCreateWithoutPlantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
 }
 
 export type EventCreateOrConnectWithoutPlantInput = {
@@ -453,6 +481,7 @@ export type EventScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   date?: Prisma.DateTimeFilter<"Event"> | Date | string
+  type?: Prisma.EnumEventTypeFilter<"Event"> | $Enums.EventType
   plantId?: Prisma.IntFilter<"Event"> | number
 }
 
@@ -461,12 +490,14 @@ export type EventCreateManyPlantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   date?: Date | string
+  type?: $Enums.EventType
 }
 
 export type EventUpdateWithoutPlantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
 }
 
 export type EventUncheckedUpdateWithoutPlantInput = {
@@ -474,6 +505,7 @@ export type EventUncheckedUpdateWithoutPlantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
 }
 
 export type EventUncheckedUpdateManyWithoutPlantInput = {
@@ -481,6 +513,7 @@ export type EventUncheckedUpdateManyWithoutPlantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
 }
 
 
@@ -490,6 +523,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   date?: boolean
+  type?: boolean
   plantId?: boolean
   plant?: boolean | Prisma.PlantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -499,6 +533,7 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   date?: boolean
+  type?: boolean
   plantId?: boolean
   plant?: boolean | Prisma.PlantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -508,6 +543,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   date?: boolean
+  type?: boolean
   plantId?: boolean
   plant?: boolean | Prisma.PlantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -517,10 +553,11 @@ export type EventSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   date?: boolean
+  type?: boolean
   plantId?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "date" | "plantId", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "date" | "type" | "plantId", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   plant?: boolean | Prisma.PlantDefaultArgs<ExtArgs>
 }
@@ -541,6 +578,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     createdAt: Date
     updatedAt: Date
     date: Date
+    type: $Enums.EventType
     plantId: number
   }, ExtArgs["result"]["event"]>
   composites: {}
@@ -970,6 +1008,7 @@ export interface EventFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Event", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Event", 'DateTime'>
   readonly date: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly type: Prisma.FieldRef<"Event", 'EventType'>
   readonly plantId: Prisma.FieldRef<"Event", 'Int'>
 }
     

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Plant {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  name      String\n  events    Event[]\n  index     Int?\n}\n\nmodel Event {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  date      DateTime @default(now())\n  plantId   Int\n  plant     Plant    @relation(fields: [plantId], references: [id])\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum EventType {\n  WATER\n  REPOT\n}\n\nenum PotMaterial {\n  PLASTIC\n  CERAMIC\n  TERRACOTTA\n  GLASS\n  OTHER\n}\n\nenum Substrate {\n  SOIL\n  SOIL_WITH_DRAINAGE\n  SPHAGNUM_MOSS\n  WATER\n}\n\nmodel Plant {\n  id           Int          @id @default(autoincrement())\n  createdAt    DateTime     @default(now())\n  updatedAt    DateTime     @updatedAt\n  name         String\n  events       Event[]\n  index        Int?\n  site         Site?        @relation(fields: [siteId], references: [id])\n  health       Int?\n  siteId       Int?\n  propagation  Boolean      @default(false)\n  speciesId    Int?\n  species      Species?     @relation(fields: [speciesId], references: [id])\n  potSize      Int?\n  potMaterial  PotMaterial?\n  substrate    Substrate?\n  source       String?\n  dateAcquired DateTime?\n  cost         Int?\n  alive        Boolean      @default(true)\n}\n\nmodel Event {\n  id        Int       @id @default(autoincrement())\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  date      DateTime  @default(now())\n  type      EventType @default(WATER)\n  plantId   Int\n  plant     Plant     @relation(fields: [plantId], references: [id])\n}\n\nmodel Site {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  name      String   @unique\n  plants    Plant[]\n  index     Int\n}\n\nmodel Species {\n  id              Int      @id @default(autoincrement())\n  createdAt       DateTime @default(now())\n  updatedAt       DateTime @updatedAt\n  common_name     String\n  scientific_name String\n  genusId         Int\n  genus           Genus    @relation(fields: [genusId], references: [id])\n  plants          Plant[]\n}\n\nmodel Genus {\n  id        Int       @id @default(autoincrement())\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  name      String\n  species   Species[]\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Plant\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"events\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToPlant\"},{\"name\":\"index\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"plantId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"plant\",\"kind\":\"object\",\"type\":\"Plant\",\"relationName\":\"EventToPlant\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Plant\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"events\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToPlant\"},{\"name\":\"index\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"site\",\"kind\":\"object\",\"type\":\"Site\",\"relationName\":\"PlantToSite\"},{\"name\":\"health\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"siteId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"propagation\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"speciesId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"species\",\"kind\":\"object\",\"type\":\"Species\",\"relationName\":\"PlantToSpecies\"},{\"name\":\"potSize\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"potMaterial\",\"kind\":\"enum\",\"type\":\"PotMaterial\"},{\"name\":\"substrate\",\"kind\":\"enum\",\"type\":\"Substrate\"},{\"name\":\"source\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dateAcquired\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"cost\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"alive\",\"kind\":\"scalar\",\"type\":\"Boolean\"}],\"dbName\":null},\"Event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"EventType\"},{\"name\":\"plantId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"plant\",\"kind\":\"object\",\"type\":\"Plant\",\"relationName\":\"EventToPlant\"}],\"dbName\":null},\"Site\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"plants\",\"kind\":\"object\",\"type\":\"Plant\",\"relationName\":\"PlantToSite\"},{\"name\":\"index\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Species\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"common_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scientific_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"genusId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"genus\",\"kind\":\"object\",\"type\":\"Genus\",\"relationName\":\"GenusToSpecies\"},{\"name\":\"plants\",\"kind\":\"object\",\"type\":\"Plant\",\"relationName\":\"PlantToSpecies\"}],\"dbName\":null},\"Genus\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"species\",\"kind\":\"object\",\"type\":\"Species\",\"relationName\":\"GenusToSpecies\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -193,6 +193,36 @@ export interface PrismaClient<
     * ```
     */
   get event(): Prisma.EventDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.site`: Exposes CRUD operations for the **Site** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sites
+    * const sites = await prisma.site.findMany()
+    * ```
+    */
+  get site(): Prisma.SiteDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.species`: Exposes CRUD operations for the **Species** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Species
+    * const species = await prisma.species.findMany()
+    * ```
+    */
+  get species(): Prisma.SpeciesDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.genus`: Exposes CRUD operations for the **Genus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Genera
+    * const genera = await prisma.genus.findMany()
+    * ```
+    */
+  get genus(): Prisma.GenusDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Plant: 'Plant',
-  Event: 'Event'
+  Event: 'Event',
+  Site: 'Site',
+  Species: 'Species',
+  Genus: 'Genus'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -76,7 +79,18 @@ export const PlantScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   name: 'name',
-  index: 'index'
+  index: 'index',
+  health: 'health',
+  siteId: 'siteId',
+  propagation: 'propagation',
+  speciesId: 'speciesId',
+  potSize: 'potSize',
+  potMaterial: 'potMaterial',
+  substrate: 'substrate',
+  source: 'source',
+  dateAcquired: 'dateAcquired',
+  cost: 'cost',
+  alive: 'alive'
 } as const
 
 export type PlantScalarFieldEnum = (typeof PlantScalarFieldEnum)[keyof typeof PlantScalarFieldEnum]
@@ -87,10 +101,44 @@ export const EventScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   date: 'date',
+  type: 'type',
   plantId: 'plantId'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const SiteScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  index: 'index'
+} as const
+
+export type SiteScalarFieldEnum = (typeof SiteScalarFieldEnum)[keyof typeof SiteScalarFieldEnum]
+
+
+export const SpeciesScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  common_name: 'common_name',
+  scientific_name: 'scientific_name',
+  genusId: 'genusId'
+} as const
+
+export type SpeciesScalarFieldEnum = (typeof SpeciesScalarFieldEnum)[keyof typeof SpeciesScalarFieldEnum]
+
+
+export const GenusScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name'
+} as const
+
+export type GenusScalarFieldEnum = (typeof GenusScalarFieldEnum)[keyof typeof GenusScalarFieldEnum]
 
 
 export const SortOrder = {

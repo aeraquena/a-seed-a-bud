@@ -27,3 +27,18 @@ export type Plant = Prisma.PlantModel
  * 
  */
 export type Event = Prisma.EventModel
+/**
+ * Model Site
+ * 
+ */
+export type Site = Prisma.SiteModel
+/**
+ * Model Species
+ * 
+ */
+export type Species = Prisma.SpeciesModel
+/**
+ * Model Genus
+ * 
+ */
+export type Genus = Prisma.GenusModel

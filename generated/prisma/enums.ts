@@ -9,7 +9,30 @@
 * 🟢 You can import this file directly.
 */
 
+export const EventType = {
+  WATER: 'WATER',
+  REPOT: 'REPOT'
+} as const
+
+export type EventType = (typeof EventType)[keyof typeof EventType]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const PotMaterial = {
+  PLASTIC: 'PLASTIC',
+  CERAMIC: 'CERAMIC',
+  TERRACOTTA: 'TERRACOTTA',
+  GLASS: 'GLASS',
+  OTHER: 'OTHER'
+} as const
+
+export type PotMaterial = (typeof PotMaterial)[keyof typeof PotMaterial]
+
+
+export const Substrate = {
+  SOIL: 'SOIL',
+  SOIL_WITH_DRAINAGE: 'SOIL_WITH_DRAINAGE',
+  SPHAGNUM_MOSS: 'SPHAGNUM_MOSS',
+  WATER: 'WATER'
+} as const
+
+export type Substrate = (typeof Substrate)[keyof typeof Substrate]

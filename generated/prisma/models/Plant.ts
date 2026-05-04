@@ -29,11 +29,21 @@ export type AggregatePlant = {
 export type PlantAvgAggregateOutputType = {
   id: number | null
   index: number | null
+  health: number | null
+  siteId: number | null
+  speciesId: number | null
+  potSize: number | null
+  cost: number | null
 }
 
 export type PlantSumAggregateOutputType = {
   id: number | null
   index: number | null
+  health: number | null
+  siteId: number | null
+  speciesId: number | null
+  potSize: number | null
+  cost: number | null
 }
 
 export type PlantMinAggregateOutputType = {
@@ -42,6 +52,17 @@ export type PlantMinAggregateOutputType = {
   updatedAt: Date | null
   name: string | null
   index: number | null
+  health: number | null
+  siteId: number | null
+  propagation: boolean | null
+  speciesId: number | null
+  potSize: number | null
+  potMaterial: $Enums.PotMaterial | null
+  substrate: $Enums.Substrate | null
+  source: string | null
+  dateAcquired: Date | null
+  cost: number | null
+  alive: boolean | null
 }
 
 export type PlantMaxAggregateOutputType = {
@@ -50,6 +71,17 @@ export type PlantMaxAggregateOutputType = {
   updatedAt: Date | null
   name: string | null
   index: number | null
+  health: number | null
+  siteId: number | null
+  propagation: boolean | null
+  speciesId: number | null
+  potSize: number | null
+  potMaterial: $Enums.PotMaterial | null
+  substrate: $Enums.Substrate | null
+  source: string | null
+  dateAcquired: Date | null
+  cost: number | null
+  alive: boolean | null
 }
 
 export type PlantCountAggregateOutputType = {
@@ -58,6 +90,17 @@ export type PlantCountAggregateOutputType = {
   updatedAt: number
   name: number
   index: number
+  health: number
+  siteId: number
+  propagation: number
+  speciesId: number
+  potSize: number
+  potMaterial: number
+  substrate: number
+  source: number
+  dateAcquired: number
+  cost: number
+  alive: number
   _all: number
 }
 
@@ -65,11 +108,21 @@ export type PlantCountAggregateOutputType = {
 export type PlantAvgAggregateInputType = {
   id?: true
   index?: true
+  health?: true
+  siteId?: true
+  speciesId?: true
+  potSize?: true
+  cost?: true
 }
 
 export type PlantSumAggregateInputType = {
   id?: true
   index?: true
+  health?: true
+  siteId?: true
+  speciesId?: true
+  potSize?: true
+  cost?: true
 }
 
 export type PlantMinAggregateInputType = {
@@ -78,6 +131,17 @@ export type PlantMinAggregateInputType = {
   updatedAt?: true
   name?: true
   index?: true
+  health?: true
+  siteId?: true
+  propagation?: true
+  speciesId?: true
+  potSize?: true
+  potMaterial?: true
+  substrate?: true
+  source?: true
+  dateAcquired?: true
+  cost?: true
+  alive?: true
 }
 
 export type PlantMaxAggregateInputType = {
@@ -86,6 +150,17 @@ export type PlantMaxAggregateInputType = {
   updatedAt?: true
   name?: true
   index?: true
+  health?: true
+  siteId?: true
+  propagation?: true
+  speciesId?: true
+  potSize?: true
+  potMaterial?: true
+  substrate?: true
+  source?: true
+  dateAcquired?: true
+  cost?: true
+  alive?: true
 }
 
 export type PlantCountAggregateInputType = {
@@ -94,6 +169,17 @@ export type PlantCountAggregateInputType = {
   updatedAt?: true
   name?: true
   index?: true
+  health?: true
+  siteId?: true
+  propagation?: true
+  speciesId?: true
+  potSize?: true
+  potMaterial?: true
+  substrate?: true
+  source?: true
+  dateAcquired?: true
+  cost?: true
+  alive?: true
   _all?: true
 }
 
@@ -189,6 +275,17 @@ export type PlantGroupByOutputType = {
   updatedAt: Date
   name: string
   index: number | null
+  health: number | null
+  siteId: number | null
+  propagation: boolean
+  speciesId: number | null
+  potSize: number | null
+  potMaterial: $Enums.PotMaterial | null
+  substrate: $Enums.Substrate | null
+  source: string | null
+  dateAcquired: Date | null
+  cost: number | null
+  alive: boolean
   _count: PlantCountAggregateOutputType | null
   _avg: PlantAvgAggregateOutputType | null
   _sum: PlantSumAggregateOutputType | null
@@ -220,7 +317,20 @@ export type PlantWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
   name?: Prisma.StringFilter<"Plant"> | string
   index?: Prisma.IntNullableFilter<"Plant"> | number | null
+  health?: Prisma.IntNullableFilter<"Plant"> | number | null
+  siteId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  propagation?: Prisma.BoolFilter<"Plant"> | boolean
+  speciesId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potSize?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potMaterial?: Prisma.EnumPotMaterialNullableFilter<"Plant"> | $Enums.PotMaterial | null
+  substrate?: Prisma.EnumSubstrateNullableFilter<"Plant"> | $Enums.Substrate | null
+  source?: Prisma.StringNullableFilter<"Plant"> | string | null
+  dateAcquired?: Prisma.DateTimeNullableFilter<"Plant"> | Date | string | null
+  cost?: Prisma.IntNullableFilter<"Plant"> | number | null
+  alive?: Prisma.BoolFilter<"Plant"> | boolean
   events?: Prisma.EventListRelationFilter
+  site?: Prisma.XOR<Prisma.SiteNullableScalarRelationFilter, Prisma.SiteWhereInput> | null
+  species?: Prisma.XOR<Prisma.SpeciesNullableScalarRelationFilter, Prisma.SpeciesWhereInput> | null
 }
 
 export type PlantOrderByWithRelationInput = {
@@ -229,7 +339,20 @@ export type PlantOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
   index?: Prisma.SortOrderInput | Prisma.SortOrder
+  health?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteId?: Prisma.SortOrderInput | Prisma.SortOrder
+  propagation?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrderInput | Prisma.SortOrder
+  potSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  potMaterial?: Prisma.SortOrderInput | Prisma.SortOrder
+  substrate?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateAcquired?: Prisma.SortOrderInput | Prisma.SortOrder
+  cost?: Prisma.SortOrderInput | Prisma.SortOrder
+  alive?: Prisma.SortOrder
   events?: Prisma.EventOrderByRelationAggregateInput
+  site?: Prisma.SiteOrderByWithRelationInput
+  species?: Prisma.SpeciesOrderByWithRelationInput
 }
 
 export type PlantWhereUniqueInput = Prisma.AtLeast<{
@@ -241,7 +364,20 @@ export type PlantWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
   name?: Prisma.StringFilter<"Plant"> | string
   index?: Prisma.IntNullableFilter<"Plant"> | number | null
+  health?: Prisma.IntNullableFilter<"Plant"> | number | null
+  siteId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  propagation?: Prisma.BoolFilter<"Plant"> | boolean
+  speciesId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potSize?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potMaterial?: Prisma.EnumPotMaterialNullableFilter<"Plant"> | $Enums.PotMaterial | null
+  substrate?: Prisma.EnumSubstrateNullableFilter<"Plant"> | $Enums.Substrate | null
+  source?: Prisma.StringNullableFilter<"Plant"> | string | null
+  dateAcquired?: Prisma.DateTimeNullableFilter<"Plant"> | Date | string | null
+  cost?: Prisma.IntNullableFilter<"Plant"> | number | null
+  alive?: Prisma.BoolFilter<"Plant"> | boolean
   events?: Prisma.EventListRelationFilter
+  site?: Prisma.XOR<Prisma.SiteNullableScalarRelationFilter, Prisma.SiteWhereInput> | null
+  species?: Prisma.XOR<Prisma.SpeciesNullableScalarRelationFilter, Prisma.SpeciesWhereInput> | null
 }, "id">
 
 export type PlantOrderByWithAggregationInput = {
@@ -250,6 +386,17 @@ export type PlantOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
   index?: Prisma.SortOrderInput | Prisma.SortOrder
+  health?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteId?: Prisma.SortOrderInput | Prisma.SortOrder
+  propagation?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrderInput | Prisma.SortOrder
+  potSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  potMaterial?: Prisma.SortOrderInput | Prisma.SortOrder
+  substrate?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateAcquired?: Prisma.SortOrderInput | Prisma.SortOrder
+  cost?: Prisma.SortOrderInput | Prisma.SortOrder
+  alive?: Prisma.SortOrder
   _count?: Prisma.PlantCountOrderByAggregateInput
   _avg?: Prisma.PlantAvgOrderByAggregateInput
   _max?: Prisma.PlantMaxOrderByAggregateInput
@@ -266,6 +413,17 @@ export type PlantScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Plant"> | Date | string
   name?: Prisma.StringWithAggregatesFilter<"Plant"> | string
   index?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  health?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  siteId?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  propagation?: Prisma.BoolWithAggregatesFilter<"Plant"> | boolean
+  speciesId?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  potSize?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  potMaterial?: Prisma.EnumPotMaterialNullableWithAggregatesFilter<"Plant"> | $Enums.PotMaterial | null
+  substrate?: Prisma.EnumSubstrateNullableWithAggregatesFilter<"Plant"> | $Enums.Substrate | null
+  source?: Prisma.StringNullableWithAggregatesFilter<"Plant"> | string | null
+  dateAcquired?: Prisma.DateTimeNullableWithAggregatesFilter<"Plant"> | Date | string | null
+  cost?: Prisma.IntNullableWithAggregatesFilter<"Plant"> | number | null
+  alive?: Prisma.BoolWithAggregatesFilter<"Plant"> | boolean
 }
 
 export type PlantCreateInput = {
@@ -273,7 +431,18 @@ export type PlantCreateInput = {
   updatedAt?: Date | string
   name: string
   index?: number | null
+  health?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
   events?: Prisma.EventCreateNestedManyWithoutPlantInput
+  site?: Prisma.SiteCreateNestedOneWithoutPlantsInput
+  species?: Prisma.SpeciesCreateNestedOneWithoutPlantsInput
 }
 
 export type PlantUncheckedCreateInput = {
@@ -282,6 +451,17 @@ export type PlantUncheckedCreateInput = {
   updatedAt?: Date | string
   name: string
   index?: number | null
+  health?: number | null
+  siteId?: number | null
+  propagation?: boolean
+  speciesId?: number | null
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPlantInput
 }
 
@@ -290,7 +470,18 @@ export type PlantUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   events?: Prisma.EventUpdateManyWithoutPlantNestedInput
+  site?: Prisma.SiteUpdateOneWithoutPlantsNestedInput
+  species?: Prisma.SpeciesUpdateOneWithoutPlantsNestedInput
 }
 
 export type PlantUncheckedUpdateInput = {
@@ -299,6 +490,17 @@ export type PlantUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  siteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  speciesId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   events?: Prisma.EventUncheckedUpdateManyWithoutPlantNestedInput
 }
 
@@ -308,6 +510,17 @@ export type PlantCreateManyInput = {
   updatedAt?: Date | string
   name: string
   index?: number | null
+  health?: number | null
+  siteId?: number | null
+  propagation?: boolean
+  speciesId?: number | null
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
 }
 
 export type PlantUpdateManyMutationInput = {
@@ -315,6 +528,15 @@ export type PlantUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PlantUncheckedUpdateManyInput = {
@@ -323,6 +545,17 @@ export type PlantUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  siteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  speciesId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PlantCountOrderByAggregateInput = {
@@ -331,11 +564,27 @@ export type PlantCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
   index?: Prisma.SortOrder
+  health?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  propagation?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrder
+  potSize?: Prisma.SortOrder
+  potMaterial?: Prisma.SortOrder
+  substrate?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  dateAcquired?: Prisma.SortOrder
+  cost?: Prisma.SortOrder
+  alive?: Prisma.SortOrder
 }
 
 export type PlantAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   index?: Prisma.SortOrder
+  health?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrder
+  potSize?: Prisma.SortOrder
+  cost?: Prisma.SortOrder
 }
 
 export type PlantMaxOrderByAggregateInput = {
@@ -344,6 +593,17 @@ export type PlantMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
   index?: Prisma.SortOrder
+  health?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  propagation?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrder
+  potSize?: Prisma.SortOrder
+  potMaterial?: Prisma.SortOrder
+  substrate?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  dateAcquired?: Prisma.SortOrder
+  cost?: Prisma.SortOrder
+  alive?: Prisma.SortOrder
 }
 
 export type PlantMinOrderByAggregateInput = {
@@ -352,16 +612,42 @@ export type PlantMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
   index?: Prisma.SortOrder
+  health?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  propagation?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrder
+  potSize?: Prisma.SortOrder
+  potMaterial?: Prisma.SortOrder
+  substrate?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  dateAcquired?: Prisma.SortOrder
+  cost?: Prisma.SortOrder
+  alive?: Prisma.SortOrder
 }
 
 export type PlantSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   index?: Prisma.SortOrder
+  health?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  speciesId?: Prisma.SortOrder
+  potSize?: Prisma.SortOrder
+  cost?: Prisma.SortOrder
 }
 
 export type PlantScalarRelationFilter = {
   is?: Prisma.PlantWhereInput
   isNot?: Prisma.PlantWhereInput
+}
+
+export type PlantListRelationFilter = {
+  every?: Prisma.PlantWhereInput
+  some?: Prisma.PlantWhereInput
+  none?: Prisma.PlantWhereInput
+}
+
+export type PlantOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -378,6 +664,26 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableEnumPotMaterialFieldUpdateOperationsInput = {
+  set?: $Enums.PotMaterial | null
+}
+
+export type NullableEnumSubstrateFieldUpdateOperationsInput = {
+  set?: $Enums.Substrate | null
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -402,11 +708,106 @@ export type PlantUpdateOneRequiredWithoutEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlantUpdateToOneWithWhereWithoutEventsInput, Prisma.PlantUpdateWithoutEventsInput>, Prisma.PlantUncheckedUpdateWithoutEventsInput>
 }
 
+export type PlantCreateNestedManyWithoutSiteInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput> | Prisma.PlantCreateWithoutSiteInput[] | Prisma.PlantUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSiteInput | Prisma.PlantCreateOrConnectWithoutSiteInput[]
+  createMany?: Prisma.PlantCreateManySiteInputEnvelope
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+}
+
+export type PlantUncheckedCreateNestedManyWithoutSiteInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput> | Prisma.PlantCreateWithoutSiteInput[] | Prisma.PlantUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSiteInput | Prisma.PlantCreateOrConnectWithoutSiteInput[]
+  createMany?: Prisma.PlantCreateManySiteInputEnvelope
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+}
+
+export type PlantUpdateManyWithoutSiteNestedInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput> | Prisma.PlantCreateWithoutSiteInput[] | Prisma.PlantUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSiteInput | Prisma.PlantCreateOrConnectWithoutSiteInput[]
+  upsert?: Prisma.PlantUpsertWithWhereUniqueWithoutSiteInput | Prisma.PlantUpsertWithWhereUniqueWithoutSiteInput[]
+  createMany?: Prisma.PlantCreateManySiteInputEnvelope
+  set?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  disconnect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  delete?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  update?: Prisma.PlantUpdateWithWhereUniqueWithoutSiteInput | Prisma.PlantUpdateWithWhereUniqueWithoutSiteInput[]
+  updateMany?: Prisma.PlantUpdateManyWithWhereWithoutSiteInput | Prisma.PlantUpdateManyWithWhereWithoutSiteInput[]
+  deleteMany?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+}
+
+export type PlantUncheckedUpdateManyWithoutSiteNestedInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput> | Prisma.PlantCreateWithoutSiteInput[] | Prisma.PlantUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSiteInput | Prisma.PlantCreateOrConnectWithoutSiteInput[]
+  upsert?: Prisma.PlantUpsertWithWhereUniqueWithoutSiteInput | Prisma.PlantUpsertWithWhereUniqueWithoutSiteInput[]
+  createMany?: Prisma.PlantCreateManySiteInputEnvelope
+  set?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  disconnect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  delete?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  update?: Prisma.PlantUpdateWithWhereUniqueWithoutSiteInput | Prisma.PlantUpdateWithWhereUniqueWithoutSiteInput[]
+  updateMany?: Prisma.PlantUpdateManyWithWhereWithoutSiteInput | Prisma.PlantUpdateManyWithWhereWithoutSiteInput[]
+  deleteMany?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+}
+
+export type PlantCreateNestedManyWithoutSpeciesInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput> | Prisma.PlantCreateWithoutSpeciesInput[] | Prisma.PlantUncheckedCreateWithoutSpeciesInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSpeciesInput | Prisma.PlantCreateOrConnectWithoutSpeciesInput[]
+  createMany?: Prisma.PlantCreateManySpeciesInputEnvelope
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+}
+
+export type PlantUncheckedCreateNestedManyWithoutSpeciesInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput> | Prisma.PlantCreateWithoutSpeciesInput[] | Prisma.PlantUncheckedCreateWithoutSpeciesInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSpeciesInput | Prisma.PlantCreateOrConnectWithoutSpeciesInput[]
+  createMany?: Prisma.PlantCreateManySpeciesInputEnvelope
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+}
+
+export type PlantUpdateManyWithoutSpeciesNestedInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput> | Prisma.PlantCreateWithoutSpeciesInput[] | Prisma.PlantUncheckedCreateWithoutSpeciesInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSpeciesInput | Prisma.PlantCreateOrConnectWithoutSpeciesInput[]
+  upsert?: Prisma.PlantUpsertWithWhereUniqueWithoutSpeciesInput | Prisma.PlantUpsertWithWhereUniqueWithoutSpeciesInput[]
+  createMany?: Prisma.PlantCreateManySpeciesInputEnvelope
+  set?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  disconnect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  delete?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  update?: Prisma.PlantUpdateWithWhereUniqueWithoutSpeciesInput | Prisma.PlantUpdateWithWhereUniqueWithoutSpeciesInput[]
+  updateMany?: Prisma.PlantUpdateManyWithWhereWithoutSpeciesInput | Prisma.PlantUpdateManyWithWhereWithoutSpeciesInput[]
+  deleteMany?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+}
+
+export type PlantUncheckedUpdateManyWithoutSpeciesNestedInput = {
+  create?: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput> | Prisma.PlantCreateWithoutSpeciesInput[] | Prisma.PlantUncheckedCreateWithoutSpeciesInput[]
+  connectOrCreate?: Prisma.PlantCreateOrConnectWithoutSpeciesInput | Prisma.PlantCreateOrConnectWithoutSpeciesInput[]
+  upsert?: Prisma.PlantUpsertWithWhereUniqueWithoutSpeciesInput | Prisma.PlantUpsertWithWhereUniqueWithoutSpeciesInput[]
+  createMany?: Prisma.PlantCreateManySpeciesInputEnvelope
+  set?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  disconnect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  delete?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  connect?: Prisma.PlantWhereUniqueInput | Prisma.PlantWhereUniqueInput[]
+  update?: Prisma.PlantUpdateWithWhereUniqueWithoutSpeciesInput | Prisma.PlantUpdateWithWhereUniqueWithoutSpeciesInput[]
+  updateMany?: Prisma.PlantUpdateManyWithWhereWithoutSpeciesInput | Prisma.PlantUpdateManyWithWhereWithoutSpeciesInput[]
+  deleteMany?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+}
+
 export type PlantCreateWithoutEventsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name: string
   index?: number | null
+  health?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+  site?: Prisma.SiteCreateNestedOneWithoutPlantsInput
+  species?: Prisma.SpeciesCreateNestedOneWithoutPlantsInput
 }
 
 export type PlantUncheckedCreateWithoutEventsInput = {
@@ -415,6 +816,17 @@ export type PlantUncheckedCreateWithoutEventsInput = {
   updatedAt?: Date | string
   name: string
   index?: number | null
+  health?: number | null
+  siteId?: number | null
+  propagation?: boolean
+  speciesId?: number | null
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
 }
 
 export type PlantCreateOrConnectWithoutEventsInput = {
@@ -438,6 +850,17 @@ export type PlantUpdateWithoutEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  site?: Prisma.SiteUpdateOneWithoutPlantsNestedInput
+  species?: Prisma.SpeciesUpdateOneWithoutPlantsNestedInput
 }
 
 export type PlantUncheckedUpdateWithoutEventsInput = {
@@ -446,6 +869,311 @@ export type PlantUncheckedUpdateWithoutEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  siteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  speciesId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type PlantCreateWithoutSiteInput = {
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+  events?: Prisma.EventCreateNestedManyWithoutPlantInput
+  species?: Prisma.SpeciesCreateNestedOneWithoutPlantsInput
+}
+
+export type PlantUncheckedCreateWithoutSiteInput = {
+  id?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  propagation?: boolean
+  speciesId?: number | null
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutPlantInput
+}
+
+export type PlantCreateOrConnectWithoutSiteInput = {
+  where: Prisma.PlantWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput>
+}
+
+export type PlantCreateManySiteInputEnvelope = {
+  data: Prisma.PlantCreateManySiteInput | Prisma.PlantCreateManySiteInput[]
+  skipDuplicates?: boolean
+}
+
+export type PlantUpsertWithWhereUniqueWithoutSiteInput = {
+  where: Prisma.PlantWhereUniqueInput
+  update: Prisma.XOR<Prisma.PlantUpdateWithoutSiteInput, Prisma.PlantUncheckedUpdateWithoutSiteInput>
+  create: Prisma.XOR<Prisma.PlantCreateWithoutSiteInput, Prisma.PlantUncheckedCreateWithoutSiteInput>
+}
+
+export type PlantUpdateWithWhereUniqueWithoutSiteInput = {
+  where: Prisma.PlantWhereUniqueInput
+  data: Prisma.XOR<Prisma.PlantUpdateWithoutSiteInput, Prisma.PlantUncheckedUpdateWithoutSiteInput>
+}
+
+export type PlantUpdateManyWithWhereWithoutSiteInput = {
+  where: Prisma.PlantScalarWhereInput
+  data: Prisma.XOR<Prisma.PlantUpdateManyMutationInput, Prisma.PlantUncheckedUpdateManyWithoutSiteInput>
+}
+
+export type PlantScalarWhereInput = {
+  AND?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+  OR?: Prisma.PlantScalarWhereInput[]
+  NOT?: Prisma.PlantScalarWhereInput | Prisma.PlantScalarWhereInput[]
+  id?: Prisma.IntFilter<"Plant"> | number
+  createdAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
+  name?: Prisma.StringFilter<"Plant"> | string
+  index?: Prisma.IntNullableFilter<"Plant"> | number | null
+  health?: Prisma.IntNullableFilter<"Plant"> | number | null
+  siteId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  propagation?: Prisma.BoolFilter<"Plant"> | boolean
+  speciesId?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potSize?: Prisma.IntNullableFilter<"Plant"> | number | null
+  potMaterial?: Prisma.EnumPotMaterialNullableFilter<"Plant"> | $Enums.PotMaterial | null
+  substrate?: Prisma.EnumSubstrateNullableFilter<"Plant"> | $Enums.Substrate | null
+  source?: Prisma.StringNullableFilter<"Plant"> | string | null
+  dateAcquired?: Prisma.DateTimeNullableFilter<"Plant"> | Date | string | null
+  cost?: Prisma.IntNullableFilter<"Plant"> | number | null
+  alive?: Prisma.BoolFilter<"Plant"> | boolean
+}
+
+export type PlantCreateWithoutSpeciesInput = {
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+  events?: Prisma.EventCreateNestedManyWithoutPlantInput
+  site?: Prisma.SiteCreateNestedOneWithoutPlantsInput
+}
+
+export type PlantUncheckedCreateWithoutSpeciesInput = {
+  id?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  siteId?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutPlantInput
+}
+
+export type PlantCreateOrConnectWithoutSpeciesInput = {
+  where: Prisma.PlantWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput>
+}
+
+export type PlantCreateManySpeciesInputEnvelope = {
+  data: Prisma.PlantCreateManySpeciesInput | Prisma.PlantCreateManySpeciesInput[]
+  skipDuplicates?: boolean
+}
+
+export type PlantUpsertWithWhereUniqueWithoutSpeciesInput = {
+  where: Prisma.PlantWhereUniqueInput
+  update: Prisma.XOR<Prisma.PlantUpdateWithoutSpeciesInput, Prisma.PlantUncheckedUpdateWithoutSpeciesInput>
+  create: Prisma.XOR<Prisma.PlantCreateWithoutSpeciesInput, Prisma.PlantUncheckedCreateWithoutSpeciesInput>
+}
+
+export type PlantUpdateWithWhereUniqueWithoutSpeciesInput = {
+  where: Prisma.PlantWhereUniqueInput
+  data: Prisma.XOR<Prisma.PlantUpdateWithoutSpeciesInput, Prisma.PlantUncheckedUpdateWithoutSpeciesInput>
+}
+
+export type PlantUpdateManyWithWhereWithoutSpeciesInput = {
+  where: Prisma.PlantScalarWhereInput
+  data: Prisma.XOR<Prisma.PlantUpdateManyMutationInput, Prisma.PlantUncheckedUpdateManyWithoutSpeciesInput>
+}
+
+export type PlantCreateManySiteInput = {
+  id?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  propagation?: boolean
+  speciesId?: number | null
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+}
+
+export type PlantUpdateWithoutSiteInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  events?: Prisma.EventUpdateManyWithoutPlantNestedInput
+  species?: Prisma.SpeciesUpdateOneWithoutPlantsNestedInput
+}
+
+export type PlantUncheckedUpdateWithoutSiteInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  speciesId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  events?: Prisma.EventUncheckedUpdateManyWithoutPlantNestedInput
+}
+
+export type PlantUncheckedUpdateManyWithoutSiteInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  speciesId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type PlantCreateManySpeciesInput = {
+  id?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  index?: number | null
+  health?: number | null
+  siteId?: number | null
+  propagation?: boolean
+  potSize?: number | null
+  potMaterial?: $Enums.PotMaterial | null
+  substrate?: $Enums.Substrate | null
+  source?: string | null
+  dateAcquired?: Date | string | null
+  cost?: number | null
+  alive?: boolean
+}
+
+export type PlantUpdateWithoutSpeciesInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  events?: Prisma.EventUpdateManyWithoutPlantNestedInput
+  site?: Prisma.SiteUpdateOneWithoutPlantsNestedInput
+}
+
+export type PlantUncheckedUpdateWithoutSpeciesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  siteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  events?: Prisma.EventUncheckedUpdateManyWithoutPlantNestedInput
+}
+
+export type PlantUncheckedUpdateManyWithoutSpeciesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  health?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  siteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propagation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  potSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  potMaterial?: Prisma.NullableEnumPotMaterialFieldUpdateOperationsInput | $Enums.PotMaterial | null
+  substrate?: Prisma.NullableEnumSubstrateFieldUpdateOperationsInput | $Enums.Substrate | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateAcquired?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cost?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  alive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -485,7 +1213,20 @@ export type PlantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   name?: boolean
   index?: boolean
+  health?: boolean
+  siteId?: boolean
+  propagation?: boolean
+  speciesId?: boolean
+  potSize?: boolean
+  potMaterial?: boolean
+  substrate?: boolean
+  source?: boolean
+  dateAcquired?: boolean
+  cost?: boolean
+  alive?: boolean
   events?: boolean | Prisma.Plant$eventsArgs<ExtArgs>
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
   _count?: boolean | Prisma.PlantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["plant"]>
 
@@ -495,6 +1236,19 @@ export type PlantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   name?: boolean
   index?: boolean
+  health?: boolean
+  siteId?: boolean
+  propagation?: boolean
+  speciesId?: boolean
+  potSize?: boolean
+  potMaterial?: boolean
+  substrate?: boolean
+  source?: boolean
+  dateAcquired?: boolean
+  cost?: boolean
+  alive?: boolean
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
 }, ExtArgs["result"]["plant"]>
 
 export type PlantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -503,6 +1257,19 @@ export type PlantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   name?: boolean
   index?: boolean
+  health?: boolean
+  siteId?: boolean
+  propagation?: boolean
+  speciesId?: boolean
+  potSize?: boolean
+  potMaterial?: boolean
+  substrate?: boolean
+  source?: boolean
+  dateAcquired?: boolean
+  cost?: boolean
+  alive?: boolean
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
 }, ExtArgs["result"]["plant"]>
 
 export type PlantSelectScalar = {
@@ -511,20 +1278,41 @@ export type PlantSelectScalar = {
   updatedAt?: boolean
   name?: boolean
   index?: boolean
+  health?: boolean
+  siteId?: boolean
+  propagation?: boolean
+  speciesId?: boolean
+  potSize?: boolean
+  potMaterial?: boolean
+  substrate?: boolean
+  source?: boolean
+  dateAcquired?: boolean
+  cost?: boolean
+  alive?: boolean
 }
 
-export type PlantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "index", ExtArgs["result"]["plant"]>
+export type PlantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "index" | "health" | "siteId" | "propagation" | "speciesId" | "potSize" | "potMaterial" | "substrate" | "source" | "dateAcquired" | "cost" | "alive", ExtArgs["result"]["plant"]>
 export type PlantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   events?: boolean | Prisma.Plant$eventsArgs<ExtArgs>
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
   _count?: boolean | Prisma.PlantCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type PlantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type PlantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PlantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
+}
+export type PlantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  site?: boolean | Prisma.Plant$siteArgs<ExtArgs>
+  species?: boolean | Prisma.Plant$speciesArgs<ExtArgs>
+}
 
 export type $PlantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Plant"
   objects: {
     events: Prisma.$EventPayload<ExtArgs>[]
+    site: Prisma.$SitePayload<ExtArgs> | null
+    species: Prisma.$SpeciesPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -532,6 +1320,17 @@ export type $PlantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     updatedAt: Date
     name: string
     index: number | null
+    health: number | null
+    siteId: number | null
+    propagation: boolean
+    speciesId: number | null
+    potSize: number | null
+    potMaterial: $Enums.PotMaterial | null
+    substrate: $Enums.Substrate | null
+    source: string | null
+    dateAcquired: Date | null
+    cost: number | null
+    alive: boolean
   }, ExtArgs["result"]["plant"]>
   composites: {}
 }
@@ -927,6 +1726,8 @@ readonly fields: PlantFieldRefs;
 export interface Prisma__PlantClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   events<T extends Prisma.Plant$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plant$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  site<T extends Prisma.Plant$siteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plant$siteArgs<ExtArgs>>): Prisma.Prisma__SiteClient<runtime.Types.Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  species<T extends Prisma.Plant$speciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plant$speciesArgs<ExtArgs>>): Prisma.Prisma__SpeciesClient<runtime.Types.Result.GetResult<Prisma.$SpeciesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -961,6 +1762,17 @@ export interface PlantFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Plant", 'DateTime'>
   readonly name: Prisma.FieldRef<"Plant", 'String'>
   readonly index: Prisma.FieldRef<"Plant", 'Int'>
+  readonly health: Prisma.FieldRef<"Plant", 'Int'>
+  readonly siteId: Prisma.FieldRef<"Plant", 'Int'>
+  readonly propagation: Prisma.FieldRef<"Plant", 'Boolean'>
+  readonly speciesId: Prisma.FieldRef<"Plant", 'Int'>
+  readonly potSize: Prisma.FieldRef<"Plant", 'Int'>
+  readonly potMaterial: Prisma.FieldRef<"Plant", 'PotMaterial'>
+  readonly substrate: Prisma.FieldRef<"Plant", 'Substrate'>
+  readonly source: Prisma.FieldRef<"Plant", 'String'>
+  readonly dateAcquired: Prisma.FieldRef<"Plant", 'DateTime'>
+  readonly cost: Prisma.FieldRef<"Plant", 'Int'>
+  readonly alive: Prisma.FieldRef<"Plant", 'Boolean'>
 }
     
 
@@ -1210,6 +2022,10 @@ export type PlantCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.PlantCreateManyInput | Prisma.PlantCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlantIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1280,6 +2096,10 @@ export type PlantUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many Plants to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlantIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1370,6 +2190,44 @@ export type Plant$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
+}
+
+/**
+ * Plant.site
+ */
+export type Plant$siteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Site
+   */
+  select?: Prisma.SiteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Site
+   */
+  omit?: Prisma.SiteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteInclude<ExtArgs> | null
+  where?: Prisma.SiteWhereInput
+}
+
+/**
+ * Plant.species
+ */
+export type Plant$speciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Species
+   */
+  select?: Prisma.SpeciesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Species
+   */
+  omit?: Prisma.SpeciesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpeciesInclude<ExtArgs> | null
+  where?: Prisma.SpeciesWhereInput
 }
 
 /**

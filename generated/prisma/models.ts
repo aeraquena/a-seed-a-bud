@@ -10,4 +10,7 @@
  */
 export type * from './models/Plant'
 export type * from './models/Event'
+export type * from './models/Site'
+export type * from './models/Species'
+export type * from './models/Genus'
 export type * from './commonInputTypes'

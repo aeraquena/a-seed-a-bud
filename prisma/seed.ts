@@ -79,11 +79,19 @@ const siteData = [
 ]
 
 export async function main() {
-  for (const p of plantData) {
-    await prisma.plant.upsert({ data: p });
-  }
+  /*for (const p of plantData) {
+    await prisma.plant.upsert({
+      where: { name: s.name },
+      update: { index: s.index },
+      create: s,
+    });
+  }*/
   for (const s of siteData) {
-    await prisma.site.upsert({ data: s });
+    await prisma.site.upsert({
+      where: { name: s.name },
+      update: { index: s.index },
+      create: s,
+    });
   }
 }
 
