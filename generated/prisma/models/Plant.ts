@@ -357,12 +357,12 @@ export type PlantOrderByWithRelationInput = {
 
 export type PlantWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.PlantWhereInput | Prisma.PlantWhereInput[]
   OR?: Prisma.PlantWhereInput[]
   NOT?: Prisma.PlantWhereInput | Prisma.PlantWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plant"> | Date | string
-  name?: Prisma.StringFilter<"Plant"> | string
   index?: Prisma.IntNullableFilter<"Plant"> | number | null
   health?: Prisma.IntNullableFilter<"Plant"> | number | null
   siteId?: Prisma.IntNullableFilter<"Plant"> | number | null
@@ -378,7 +378,7 @@ export type PlantWhereUniqueInput = Prisma.AtLeast<{
   events?: Prisma.EventListRelationFilter
   site?: Prisma.XOR<Prisma.SiteNullableScalarRelationFilter, Prisma.SiteWhereInput> | null
   species?: Prisma.XOR<Prisma.SpeciesNullableScalarRelationFilter, Prisma.SpeciesWhereInput> | null
-}, "id">
+}, "id" | "name">
 
 export type PlantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
