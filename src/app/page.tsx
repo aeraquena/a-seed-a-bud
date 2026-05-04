@@ -43,18 +43,23 @@ export default async function Home() {
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  const plants = await prisma.plant.findMany({
-    //orderBy: { index: { sort: "asc", nulls: "last" } },
+  const sites = await prisma.site.findMany({
+    orderBy: { index: 'asc' },
     include: {
-      events: {
-        orderBy: { date: "desc" },
-        take: 1,
-        select: {
-          date: true,
-        },
+      plants: {
+        orderBy: { index: 'asc' },
+        include: {
+          events: {
+            orderBy: { date: "desc" },
+            take: 1,
+            select: {
+              date: true,
+            },
+          },
+      },
       },
     },
-  });
+  })
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-8">
@@ -62,42 +67,49 @@ export default async function Home() {
         A Seed! A Bud!
       </h1>
       <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
-        {plants.map((plant) => (
-          <li key={plant.id} className="mb-2">
-            <form action={waterPlant}>
-              <div
-                style={{
-                  backgroundColor: getWateringColor(plant.events[0]?.date),
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  display: "inline-block",
-                }}
-              />
-              <Link
-                href={{ pathname: "/plants/" + plant.id }}
-                className="font-semibold m-4"
-              >
-                <div className="w-64 inline-block">{plant.name}</div>
-              </Link>
-              <input type="hidden" name="plantId" value={plant.id}></input>
-              <input type="date" name="date" className="m-4" />
-              <button
-                type="submit"
-                className="m-4 px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition duration-150"
-              >
-                Water
-              </button>
-              <span>
-                Last:{" "}
-                {new Intl.DateTimeFormat("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                }).format(plant.events[0]?.date)}
-              </span>
-            </form>
-          </li>
+        {sites.map((site) => (
+          <div key={site.id}>
+            <h2 className="font-bold">{site.name}</h2>
+            {site.plants.map((plant) => (
+              <li key={plant.id} className="mb-2">
+                <form action={waterPlant}>
+                  <div
+                    style={{
+                      backgroundColor: plant.events ? getWateringColor(plant.events[0]?.date) : '#ffffff',
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      display: "inline-block",
+                    }}
+                  />
+                  <Link
+                    href={{ pathname: "/plants/" + plant.id }}
+                    className="font-semibold m-4"
+                  >
+                    <div className="w-64 inline-block">{plant.name}</div>
+                  </Link>
+                  <input type="hidden" name="plantId" value={plant.id}></input>
+                  <input type="date" name="date" className="m-4" />
+                  <button
+                    type="submit"
+                    className="m-4 px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition duration-150"
+                  >
+                    Water
+                  </button>
+                  <span>
+                    Last:{" "}
+                    {plant.events ? 
+                    new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }).format(plant.events[0]?.date) 
+                    : 'Never'}
+                  </span>
+                </form>
+              </li>
+            ))}
+          </div>
         ))}
       </ul>
       <Link href={{ pathname: "/plants/new " }}>

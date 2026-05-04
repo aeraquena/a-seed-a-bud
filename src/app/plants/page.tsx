@@ -1,9 +1,9 @@
 export default async function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
-      <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)] text-[#333333]">
+    <div className="-mt-16 flex min-h-screen flex-col items-center justify-center bg-gray-50">
+      <h1 className="mb-8 font-[family-name:var(--font-geist-sans)] text-4xl font-bold text-[#333333]">
         Plants
       </h1>
     </div>
-  );
+  )
 }
