@@ -28,11 +28,11 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
   }
 
   return (
-    <li ref={setNodeRef} style={style} className="mb-2 flex w-96">
+    <li ref={setNodeRef} style={style} className="mb-2 flex w-96 select-none">
       <span
         {...attributes}
         {...listeners}
-        className="mr-2 cursor-grab touch-none text-gray-400 select-none active:cursor-grabbing"
+        className="mr-2 flex items-center cursor-grab touch-none text-gray-400 select-none active:cursor-grabbing"
         aria-label="Drag to reorder"
       >
         ⠿
