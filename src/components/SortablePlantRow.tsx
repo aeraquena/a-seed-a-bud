@@ -28,7 +28,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
   }
 
   return (
-    <li ref={setNodeRef} style={style} className="mb-2 flex items-center">
+    <li ref={setNodeRef} style={style} className="mb-2 flex w-72">
       <span
         {...attributes}
         {...listeners}
@@ -37,34 +37,35 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       >
         ⠿
       </span>
-      <form action={waterPlant} className="flex items-center">
-        <div
-          style={{
-            backgroundColor: plant.events
-              ? getWateringColor(plant.events[0]?.date ?? null)
-              : '#ffffff',
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            display: 'inline-block',
-            flexShrink: 0,
-          }}
-        />
-        <Link href={{ pathname: '/plants/' + plant.id }} className="m-4">
-          <div className="inline-block w-64 font-semibold">{plant.name}</div>
-          <div>
-            <em>
-              {plant.events[0]
-                ? `${daysAgo(plant.events[0].date)} days ago`
-                : 'Never'}
-            </em>
-          </div>
-        </Link>
+      <form action={waterPlant} className="flex flex-1 items-center justify-between gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <div
+            style={{
+              backgroundColor: plant.events
+                ? getWateringColor(plant.events[0]?.date ?? null)
+                : '#ffffff',
+              width: '20px',
+              height: '20px',
+              borderRadius: '50%',
+              flexShrink: 0,
+            }}
+          />
+          <Link href={{ pathname: '/plants/' + plant.id }} className="min-w-0 py-1">
+            <div className="wrap-break-word font-semibold">{plant.name}</div>
+            <div>
+              <em>
+                {plant.events[0]
+                  ? `${daysAgo(plant.events[0].date)} days ago`
+                  : 'Never'}
+              </em>
+            </div>
+          </Link>
+        </div>
         <input type="hidden" name="plantId" value={plant.id} />
         {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
           type="submit"
-          className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"
+          className="shrink-0 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"
         >
           Water
         </button>

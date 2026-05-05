@@ -48,10 +48,7 @@ export default async function Home() {
   })
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gray-50 pt-8">
-      <h1 className="mb-8 font-(family-name:--font-geist-sans) text-4xl font-bold text-[#333333]">
-        A Seed! A Bud!
-      </h1>
+    <div className="flex min-h-screen w-full flex-col items-center bg-gray-50 px-4 pt-8">
       <div className="font-(family-name:--font-geist-sans)">
         <PlantBoard
           initialSites={sites}
