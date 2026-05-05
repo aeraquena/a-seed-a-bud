@@ -71,7 +71,7 @@ function SiteDropZone({
         items={site.plants.map((p) => p.id)}
         strategy={verticalListSortingStrategy}
       >
-        <ul className="min-h-[2rem] list-inside pb-12">
+        <ul className="min-h-[2rem] list-inside pb-4">
           {site.plants.map((plant, index) => {
             const isOver = plant.id === overId
             let showAbove = false

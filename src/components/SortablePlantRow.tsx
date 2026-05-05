@@ -29,7 +29,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
   }
 
   return (
-    <li ref={setNodeRef} style={style} className="mb-2 flex w-96 select-none">
+    <li ref={setNodeRef} style={style} className="mb-2 flex w-84 select-none">
       <span
         {...attributes}
         {...listeners}
@@ -72,7 +72,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
         {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
           type="submit"
-          className="shrink-0 flex items-center justify-center rounded-full bg-green-600 p-2 text-white transition duration-150 hover:bg-green-700"
+          className="flex shrink-0 items-center justify-center rounded-full bg-green-600 p-2 text-white transition duration-150 hover:bg-green-700"
         >
           <Droplet color="white" size={24} />
         </button>

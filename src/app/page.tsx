@@ -48,7 +48,7 @@ export default async function Home() {
   })
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center bg-gray-50 px-4 pt-8">
+    <div className="flex min-h-screen w-full flex-col items-center bg-white px-4 pt-8">
       <div className="font-(family-name:--font-geist-sans)">
         <PlantBoard
           initialSites={sites}
