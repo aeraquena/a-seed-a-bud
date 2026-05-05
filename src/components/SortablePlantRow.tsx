@@ -51,7 +51,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
           <div className="inline-block w-64">{plant.name}</div>
         </Link>
         <input type="hidden" name="plantId" value={plant.id} />
-        <input type="date" name="date" className="m-4" />
+        <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" />
         <button
           type="submit"
           className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"

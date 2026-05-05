@@ -71,7 +71,7 @@ function SiteDropZone({
         items={site.plants.map((p) => p.id)}
         strategy={verticalListSortingStrategy}
       >
-        <ul className="list-inside min-h-[2rem]">
+        <ul className="min-h-[2rem] list-inside pb-12">
           {site.plants.map((plant, index) => {
             const isOver = plant.id === overId
             let showAbove = false
@@ -129,7 +129,9 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
     return sites.find((s) => s.plants.some((p) => p.id === plantId))
   }
 
-  function findSiteForDroppable(id: UniqueIdentifier): SiteWithPlants | undefined {
+  function findSiteForDroppable(
+    id: UniqueIdentifier
+  ): SiteWithPlants | undefined {
     if (typeof id === 'string' && id.startsWith('site-')) {
       const siteId = parseInt(id.replace('site-', ''))
       return sites.find((s) => s.id === siteId)
@@ -138,7 +140,9 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
   }
 
   function handleDragStart(event: DragStartEvent) {
-    const plant = sites.flatMap((s) => s.plants).find((p) => p.id === event.active.id)
+    const plant = sites
+      .flatMap((s) => s.plants)
+      .find((p) => p.id === event.active.id)
     const site = findSiteForPlant(event.active.id as number)
     setActivePlant(plant ?? null)
     setActiveId(event.active.id)
@@ -232,7 +236,7 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
       ))}
       <DragOverlay>
         {activePlant ? (
-          <div className="rounded bg-white shadow-lg opacity-90 px-2">
+          <div className="rounded bg-white px-2 opacity-90 shadow-lg">
             <span className="font-semibold">{activePlant.name}</span>
           </div>
         ) : null}

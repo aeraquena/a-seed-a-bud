@@ -9,12 +9,19 @@ export default async function Home() {
     'use server'
 
     const plantId = Number(formData.get('plantId'))
-    const dateString = formData.get('date') as string
+    const daysAgoStr = formData.get('daysAgo') as string
+    const daysAgo = daysAgoStr !== '' ? Number(daysAgoStr) : null
+
+    let date: Date | undefined
+    if (daysAgo !== null && !isNaN(daysAgo)) {
+      date = new Date()
+      date.setDate(date.getDate() - daysAgo)
+    }
 
     await prisma.event.create({
       data: {
         plantId,
-        ...(dateString && { date: new Date(dateString) }),
+        ...(date && { date }),
       },
     })
 
@@ -25,6 +32,7 @@ export default async function Home() {
     orderBy: { index: 'asc' },
     include: {
       plants: {
+        where: { alive: true },
         orderBy: { index: 'asc' },
         include: {
           events: {
