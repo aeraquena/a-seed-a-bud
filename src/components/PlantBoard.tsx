@@ -201,11 +201,7 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
     const updates: PlantUpdate[] = newSites
       .filter((s) => affectedSiteIds.has(s.id))
       .flatMap((s) =>
-        s.plants.map((p, i) => {
-          const update: PlantUpdate = { id: p.id, index: i + 1 }
-          if (p.siteId !== s.id) update.siteId = s.id
-          return update
-        })
+        s.plants.map((p, i) => ({ id: p.id, index: i + 1, siteId: s.id }))
       )
 
     try {
