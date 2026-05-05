@@ -1,6 +1,8 @@
 import prisma from '@/../lib/prisma'
 import Link from 'next/link'
 import { revalidatePath } from 'next/cache'
+import { PlantBoard } from '@/components/PlantBoard'
+import { reorderPlants } from '@/app/actions'
 
 export default async function Home() {
   async function waterPlant(formData: FormData) {
@@ -17,34 +19,6 @@ export default async function Home() {
     })
 
     revalidatePath('/')
-  }
-
-  function daysAgo(lastWatered: Date): number {
-    return Math.floor(
-      (new Date().getTime() - lastWatered.getTime()) / (1000 * 60 * 60 * 24)
-    )
-  }
-
-  function getWateringColor(lastWatered: Date | null): string {
-    if (!lastWatered) return 'rgb(255, 255, 255)' // white if never watered
-
-    const daysSince: number = daysAgo(lastWatered)
-
-    // Define your thresholds
-    const maxDays = 20 // Fully white after 20 days
-
-    if (daysSince >= maxDays) return 'rgb(255, 255, 255)' // white
-    if (daysSince <= 0) return 'rgb(34, 197, 94)' // green-500
-
-    // Interpolate from green to white
-    const ratio = daysSince / maxDays
-
-    // Green (34, 197, 94) → White (255, 255, 255)
-    const r = Math.round(34 + (255 - 34) * ratio)
-    const g = Math.round(197 + (255 - 197) * ratio)
-    const b = Math.round(94 + (255 - 94) * ratio)
-
-    return `rgb(${r}, ${g}, ${b})`
   }
 
   const sites = await prisma.site.findMany({
@@ -70,50 +44,13 @@ export default async function Home() {
       <h1 className="mb-8 font-(family-name:--font-geist-sans) text-4xl font-bold text-[#333333]">
         A Seed! A Bud!
       </h1>
-      <ul className="list-inside font-(family-name:--font-geist-sans)">
-        {sites.map((site) => (
-          <div key={site.id} className="my-8">
-            <h2 className="mb-4 text-2xl font-bold">{site.name}</h2>
-            {site.plants.map((plant) => (
-              <li key={plant.id} className="mb-2">
-                <form action={waterPlant}>
-                  <div
-                    style={{
-                      backgroundColor: plant.events
-                        ? getWateringColor(plant.events[0]?.date)
-                        : '#ffffff',
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      display: 'inline-block',
-                    }}
-                  />
-                  <Link
-                    href={{ pathname: '/plants/' + plant.id }}
-                    className="m-4 font-semibold"
-                  >
-                    <div className="inline-block w-64">{plant.name}</div>
-                  </Link>
-                  <input type="hidden" name="plantId" value={plant.id}></input>
-                  <input type="date" name="date" className="m-4" />
-                  <button
-                    type="submit"
-                    className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"
-                  >
-                    Water
-                  </button>
-                  <span>
-                    Last:{' '}
-                    {plant.events[0]
-                      ? `${daysAgo(plant.events[0]?.date)} days ago`
-                      : 'Never'}
-                  </span>
-                </form>
-              </li>
-            ))}
-          </div>
-        ))}
-      </ul>
+      <div className="font-(family-name:--font-geist-sans)">
+        <PlantBoard
+          initialSites={sites}
+          reorderPlants={reorderPlants}
+          waterPlant={waterPlant}
+        />
+      </div>
       <Link href={{ pathname: '/plants/new ' }}>
         <button className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700">
           + Add new plant
