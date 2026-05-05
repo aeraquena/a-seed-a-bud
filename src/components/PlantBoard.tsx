@@ -65,7 +65,7 @@ function SiteDropZone({
     site.plants.every((p) => p.id !== activeId)
 
   return (
-    <div ref={setNodeRef} className="my-8">
+    <div ref={setNodeRef} className="mb-8">
       <h2 className="mb-4 text-2xl font-bold">{site.name}</h2>
       <SortableContext
         items={site.plants.map((p) => p.id)}

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import Link from 'next/link'
@@ -13,6 +14,10 @@ type Props = {
 }
 
 export function SortablePlantRow({ plant, waterPlant }: Props) {
+  const [wateredToday, setWateredToday] = useState(
+    plant.events[0] ? daysAgo(plant.events[0].date) === 0 : false
+  )
+
   const {
     attributes,
     listeners,
@@ -40,14 +45,15 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       </span>
       <form
         action={waterPlant}
+        onSubmit={() => setWateredToday(true)}
         className="flex flex-1 items-center justify-between gap-2"
       >
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <div
             style={{
-              backgroundColor: plant.events
-                ? getWateringColor(plant.events[0]?.date ?? null)
-                : '#ffffff',
+              backgroundColor: wateredToday
+                ? getWateringColor(new Date())
+                : getWateringColor(plant.events[0]?.date ?? null),
               width: '20px',
               height: '20px',
               borderRadius: '50%',
@@ -61,9 +67,11 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
             <div className="font-semibold wrap-break-word">{plant.name}</div>
             <div>
               <em>
-                {plant.events[0]
-                  ? `${daysAgo(plant.events[0].date)} days ago`
-                  : 'Never'}
+                {wateredToday
+                  ? '0 days ago'
+                  : plant.events[0]
+                    ? `${daysAgo(plant.events[0].date)} days ago`
+                    : 'Never'}
               </em>
             </div>
           </Link>
@@ -72,7 +80,8 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
         {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
           type="submit"
-          className="flex shrink-0 items-center justify-center rounded-full bg-green-600 p-2 text-white transition duration-150 hover:bg-green-700"
+          disabled={wateredToday}
+          className={`flex shrink-0 items-center justify-center rounded-full p-2 transition duration-150 ${wateredToday ? 'cursor-not-allowed bg-gray-300' : 'bg-green-600 hover:bg-green-700'}`}
         >
           <Droplet color="white" size={24} />
         </button>

@@ -12,12 +12,12 @@ export function daysAgo(lastWatered: Date): number {
 }
 
 export function getWateringColor(lastWatered: Date | null): string {
-  if (!lastWatered) return 'rgb(255, 255, 255)'
+  if (!lastWatered) return 'rgb(225, 225, 225)'
 
   const daysSince = daysAgo(lastWatered)
-  const maxDays = 20
+  const maxDays = 30
 
-  if (daysSince >= maxDays) return 'rgb(255, 255, 255)'
+  if (daysSince >= maxDays) return 'rgb(225, 225, 225)'
   if (daysSince <= 0) return 'rgb(34, 197, 94)'
 
   const ratio = daysSince / maxDays
