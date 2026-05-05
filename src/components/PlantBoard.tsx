@@ -12,6 +12,8 @@ import {
   DragOverlay,
   type DragEndEvent,
   type DragStartEvent,
+  type DragOverEvent,
+  type UniqueIdentifier,
 } from '@dnd-kit/core'
 import {
   SortableContext,
@@ -36,14 +38,31 @@ function normalizeSite(site: SiteWithPlants): SiteWithPlants {
   }
 }
 
+function DropLine() {
+  return <div className="mx-2 h-0.5 rounded bg-green-600" />
+}
+
 function SiteDropZone({
   site,
+  activeId,
+  activeSiteId,
+  overId,
   waterPlant,
 }: {
   site: SiteWithPlants
+  activeId: UniqueIdentifier | null
+  activeSiteId: number | null
+  overId: UniqueIdentifier | null
   waterPlant: (formData: FormData) => Promise<void>
 }) {
   const { setNodeRef } = useDroppable({ id: `site-${site.id}` })
+
+  const isCrossSite = activeSiteId !== null && activeSiteId !== site.id
+  const activeIndexInSite = site.plants.findIndex((p) => p.id === activeId)
+  const showEndLine =
+    activeId !== null &&
+    overId === `site-${site.id}` &&
+    site.plants.every((p) => p.id !== activeId)
 
   return (
     <div ref={setNodeRef} className="my-8">
@@ -53,9 +72,33 @@ function SiteDropZone({
         strategy={verticalListSortingStrategy}
       >
         <ul className="list-inside min-h-[2rem]">
-          {site.plants.map((plant) => (
-            <SortablePlantRow key={plant.id} plant={plant} waterPlant={waterPlant} />
-          ))}
+          {site.plants.map((plant, index) => {
+            const isOver = plant.id === overId
+            let showAbove = false
+            let showBelow = false
+
+            if (isOver && activeId !== null && activeId !== plant.id) {
+              if (isCrossSite || activeIndexInSite === -1) {
+                // Cross-site: insert before the over item
+                showAbove = true
+              } else if (activeIndexInSite > index) {
+                // Dragging up within same site: insert before
+                showAbove = true
+              } else {
+                // Dragging down within same site: insert after
+                showBelow = true
+              }
+            }
+
+            return (
+              <li key={plant.id} className="list-none">
+                {showAbove && <DropLine />}
+                <SortablePlantRow plant={plant} waterPlant={waterPlant} />
+                {showBelow && <DropLine />}
+              </li>
+            )
+          })}
+          {showEndLine && <DropLine />}
         </ul>
       </SortableContext>
     </div>
@@ -73,6 +116,9 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
     initialSites.map(normalizeSite)
   )
   const [activePlant, setActivePlant] = useState<PlantWithEvents | null>(null)
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
+  const [activeSiteId, setActiveSiteId] = useState<number | null>(null)
+  const [overId, setOverId] = useState<UniqueIdentifier | null>(null)
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -83,25 +129,32 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
     return sites.find((s) => s.plants.some((p) => p.id === plantId))
   }
 
-  function findSiteForDroppable(overId: string | number): SiteWithPlants | undefined {
-    // overId is either a plant id (number) or a site droppable id ("site-{id}")
-    if (typeof overId === 'string' && overId.startsWith('site-')) {
-      const siteId = parseInt(overId.replace('site-', ''))
+  function findSiteForDroppable(id: UniqueIdentifier): SiteWithPlants | undefined {
+    if (typeof id === 'string' && id.startsWith('site-')) {
+      const siteId = parseInt(id.replace('site-', ''))
       return sites.find((s) => s.id === siteId)
     }
-    return findSiteForPlant(overId as number)
+    return findSiteForPlant(id as number)
   }
 
   function handleDragStart(event: DragStartEvent) {
-    const plant = sites
-      .flatMap((s) => s.plants)
-      .find((p) => p.id === event.active.id)
+    const plant = sites.flatMap((s) => s.plants).find((p) => p.id === event.active.id)
+    const site = findSiteForPlant(event.active.id as number)
     setActivePlant(plant ?? null)
+    setActiveId(event.active.id)
+    setActiveSiteId(site?.id ?? null)
+  }
+
+  function handleDragOver(event: DragOverEvent) {
+    setOverId(event.over?.id ?? null)
   }
 
   async function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
     setActivePlant(null)
+    setActiveId(null)
+    setActiveSiteId(null)
+    setOverId(null)
     if (!over || active.id === over.id) return
 
     const activeSite = findSiteForPlant(active.id as number)
@@ -113,7 +166,6 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
     let newSites: SiteWithPlants[]
 
     if (activeSite.id === overSite.id) {
-      // Same site — reorder within
       const oldIdx = activeSite.plants.findIndex((p) => p.id === active.id)
       const newIdx = activeSite.plants.findIndex((p) => p.id === over.id)
       if (oldIdx === newIdx) return
@@ -123,18 +175,14 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
         s.id === activeSite.id ? { ...s, plants: reordered } : s
       )
     } else {
-      // Cross-site move
       const plant = activeSite.plants.find((p) => p.id === active.id)!
       const updatedPlant = { ...plant, siteId: overSite.id }
-
       const sourcePlants = activeSite.plants.filter((p) => p.id !== active.id)
 
       let destPlants: PlantWithEvents[]
       if (typeof over.id === 'string' && over.id.startsWith('site-')) {
-        // Dropped on empty zone — append at end
         destPlants = [...overSite.plants, updatedPlant]
       } else {
-        // Dropped on a plant — insert before/after it
         const overIdx = overSite.plants.findIndex((p) => p.id === over.id)
         destPlants = [...overSite.plants]
         destPlants.splice(overIdx, 0, updatedPlant)
@@ -149,14 +197,12 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
 
     setSites(newSites)
 
-    // Build updates for all affected sites (reassign all indices to stay contiguous)
     const affectedSiteIds = new Set([activeSite.id, overSite.id])
     const updates: PlantUpdate[] = newSites
       .filter((s) => affectedSiteIds.has(s.id))
       .flatMap((s) =>
         s.plants.map((p, i) => {
           const update: PlantUpdate = { id: p.id, index: i + 1 }
-          // Include siteId only if the plant moved to a new site
           if (p.siteId !== s.id) update.siteId = s.id
           return update
         })
@@ -175,10 +221,18 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
       collisionDetection={closestCenter}
       modifiers={[restrictToWindowEdges]}
       onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
       {sites.map((site) => (
-        <SiteDropZone key={site.id} site={site} waterPlant={waterPlant} />
+        <SiteDropZone
+          key={site.id}
+          site={site}
+          activeId={activeId}
+          activeSiteId={activeSiteId}
+          overId={overId}
+          waterPlant={waterPlant}
+        />
       ))}
       <DragOverlay>
         {activePlant ? (
