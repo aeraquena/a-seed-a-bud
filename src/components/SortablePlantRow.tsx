@@ -5,6 +5,7 @@ import { CSS } from '@dnd-kit/utilities'
 import Link from 'next/link'
 import type { PlantWithEvents } from '@/lib/types'
 import { daysAgo, getWateringColor } from '@/lib/utils'
+import { Droplet } from 'lucide-react'
 
 type Props = {
   plant: PlantWithEvents
@@ -32,7 +33,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       <span
         {...attributes}
         {...listeners}
-        className="mr-2 flex items-center cursor-grab touch-none text-gray-400 select-none active:cursor-grabbing"
+        className="mr-2 flex cursor-grab touch-none items-center text-gray-400 select-none active:cursor-grabbing"
         aria-label="Drag to reorder"
       >
         ⠿
@@ -71,9 +72,9 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
         {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
           type="submit"
-          className="shrink-0 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"
+          className="shrink-0 flex items-center justify-center rounded-full bg-green-600 p-2 text-white transition duration-150 hover:bg-green-700"
         >
-          Water
+          <Droplet color="white" size={24} />
         </button>
       </form>
     </li>
