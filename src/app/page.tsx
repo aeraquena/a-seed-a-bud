@@ -19,12 +19,16 @@ export default async function Home() {
     revalidatePath('/')
   }
 
+  function daysAgo(lastWatered: Date): number {
+    return Math.floor(
+      (new Date().getTime() - lastWatered.getTime()) / (1000 * 60 * 60 * 24)
+    )
+  }
+
   function getWateringColor(lastWatered: Date | null): string {
     if (!lastWatered) return 'rgb(255, 255, 255)' // white if never watered
 
-    const daysSince = Math.floor(
-      (new Date().getTime() - lastWatered.getTime()) / (1000 * 60 * 60 * 24)
-    )
+    const daysSince: number = daysAgo(lastWatered)
 
     // Define your thresholds
     const maxDays = 20 // Fully white after 20 days
@@ -68,7 +72,7 @@ export default async function Home() {
       </h1>
       <ul className="list-inside font-(family-name:--font-geist-sans)">
         {sites.map((site) => (
-          <div key={site.id}>
+          <div key={site.id} className="my-8">
             <h2 className="mb-4 text-2xl font-bold">{site.name}</h2>
             {site.plants.map((plant) => (
               <li key={plant.id} className="mb-2">
@@ -100,12 +104,8 @@ export default async function Home() {
                   </button>
                   <span>
                     Last:{' '}
-                    {plant.events
-                      ? new Intl.DateTimeFormat('en-US', {
-                          year: 'numeric',
-                          month: '2-digit',
-                          day: '2-digit',
-                        }).format(plant.events[0]?.date)
+                    {plant.events[0]
+                      ? `${daysAgo(plant.events[0]?.date)} days ago`
                       : 'Never'}
                   </span>
                 </form>
