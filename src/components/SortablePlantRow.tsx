@@ -33,6 +33,8 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
     opacity: isDragging ? 0.4 : 1,
   }
 
+  const daysAgoWatered = plant.events[0] ? daysAgo(plant.events[0].date) : 0
+
   return (
     <li ref={setNodeRef} style={style} className="mb-2 flex w-84 select-none">
       <span
@@ -68,9 +70,9 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
             <div>
               <em>
                 {wateredToday
-                  ? '0 days ago'
+                  ? 'Today'
                   : plant.events[0]
-                    ? `${daysAgo(plant.events[0].date)} days ago`
+                    ? `${daysAgoWatered} day${daysAgoWatered > 1 ? `s` : ``} ago`
                     : 'Never'}
               </em>
             </div>

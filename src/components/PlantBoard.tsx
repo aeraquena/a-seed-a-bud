@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Fragment } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -91,11 +92,11 @@ function SiteDropZone({
             }
 
             return (
-              <li key={plant.id} className="list-none">
+              <Fragment key={plant.id}>
                 {showAbove && <DropLine />}
                 <SortablePlantRow plant={plant} waterPlant={waterPlant} />
                 {showBelow && <DropLine />}
-              </li>
+              </Fragment>
             )
           })}
           {showEndLine && <DropLine />}
