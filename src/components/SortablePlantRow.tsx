@@ -28,7 +28,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
   }
 
   return (
-    <li ref={setNodeRef} style={style} className="mb-2 flex w-72">
+    <li ref={setNodeRef} style={style} className="mb-2 flex w-96">
       <span
         {...attributes}
         {...listeners}
@@ -37,7 +37,10 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       >
         ⠿
       </span>
-      <form action={waterPlant} className="flex flex-1 items-center justify-between gap-2">
+      <form
+        action={waterPlant}
+        className="flex flex-1 items-center justify-between gap-2"
+      >
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <div
             style={{
@@ -50,8 +53,11 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
               flexShrink: 0,
             }}
           />
-          <Link href={{ pathname: '/plants/' + plant.id }} className="min-w-0 py-1">
-            <div className="wrap-break-word font-semibold">{plant.name}</div>
+          <Link
+            href={{ pathname: '/plants/' + plant.id }}
+            className="min-w-0 py-1"
+          >
+            <div className="font-semibold wrap-break-word">{plant.name}</div>
             <div>
               <em>
                 {plant.events[0]
