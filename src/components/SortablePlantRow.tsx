@@ -12,8 +12,14 @@ type Props = {
 }
 
 export function SortablePlantRow({ plant, waterPlant }: Props) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: plant.id })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: plant.id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -26,7 +32,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       <span
         {...attributes}
         {...listeners}
-        className="mr-2 cursor-grab touch-none select-none text-gray-400 active:cursor-grabbing"
+        className="mr-2 cursor-grab touch-none text-gray-400 select-none active:cursor-grabbing"
         aria-label="Drag to reorder"
       >
         ⠿
@@ -44,26 +50,24 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
             flexShrink: 0,
           }}
         />
-        <Link
-          href={{ pathname: '/plants/' + plant.id }}
-          className="m-4 font-semibold"
-        >
-          <div className="inline-block w-64">{plant.name}</div>
+        <Link href={{ pathname: '/plants/' + plant.id }} className="m-4">
+          <div className="inline-block w-64 font-semibold">{plant.name}</div>
+          <div>
+            <em>
+              {plant.events[0]
+                ? `${daysAgo(plant.events[0].date)} days ago`
+                : 'Never'}
+            </em>
+          </div>
         </Link>
         <input type="hidden" name="plantId" value={plant.id} />
-        <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" />
+        {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
           type="submit"
           className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700"
         >
           Water
         </button>
-        <span>
-          Last:{' '}
-          {plant.events[0]
-            ? `${daysAgo(plant.events[0].date)} days ago`
-            : 'Never'}
-        </span>
       </form>
     </li>
   )
