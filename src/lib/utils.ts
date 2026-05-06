@@ -6,9 +6,22 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function daysAgo(lastWatered: Date): number {
-  return Math.floor(
-    (new Date().getTime() - lastWatered.getTime()) / (1000 * 60 * 60 * 24)
-  )
+  const toETCalendarDate = (d: Date) => {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(d)
+    const y = Number(parts.find(p => p.type === 'year')!.value)
+    const m = Number(parts.find(p => p.type === 'month')!.value)
+    const day = Number(parts.find(p => p.type === 'day')!.value)
+    return new Date(y, m - 1, day)
+  }
+
+  const today = toETCalendarDate(new Date())
+  const watered = toETCalendarDate(lastWatered)
+  return Math.round((today.getTime() - watered.getTime()) / (1000 * 60 * 60 * 24))
 }
 
 export function getWateringColor(lastWatered: Date | null): string {
