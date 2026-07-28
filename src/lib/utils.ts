@@ -44,10 +44,10 @@ export function getWateringColor(lastWatered: Date | null): string {
 }
 
 const HEALTH_COLORS: Record<number, string> = {
-  1: '#FFB347',
-  2: '#FDFD96',
-  3: '#79DE79',
-  4: '#0CC078',
+  1: '#FF983E',
+  2: '#FFFF6D',
+  3: '#77D877',
+  4: '#10B070',
 }
 
 export function getHealthColor(health: number | null | undefined): string {
