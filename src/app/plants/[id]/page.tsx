@@ -1,5 +1,6 @@
 import prisma from '@/../lib/prisma'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 export default async function Post({
   params,
@@ -23,6 +24,12 @@ export default async function Post({
   return (
     <div className="-mt-16 flex min-h-screen flex-col items-center justify-center bg-gray-50">
       <h1 className="mb-8 text-4xl font-bold text-[#333333]">{plant.name}</h1>
+      <Link
+        href={`/plants/${plant.id}/edit`}
+        className="mb-8 rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+      >
+        Edit Plant
+      </Link>
       <p>
         Created on{' '}
         {new Intl.DateTimeFormat('en-US', {
