@@ -1,5 +1,6 @@
 import { PrismaClient, PotMaterial } from '../generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
+import { HEALTH_LABELS } from '../src/lib/health'
 import 'dotenv/config'
 
 const adapter = new PrismaPg({
@@ -26,13 +27,6 @@ const siteIndexMap: Record<string, number> = {
   'Living Room (Shelf 1)': 13,
 }
 
-const healthMap: Record<string, number> = {
-  Great: 4,
-  Good: 3,
-  Fair: 2,
-  Poor: 1,
-}
-
 const siteData = [
   { name: 'Bedroom (Dresser)', index: 1 },
   { name: 'Bedroom (Right Window)', index: 2 },
@@ -52,13 +46,13 @@ const siteData = [
 const plantData = [
   {
     name: 'Anthurium gracile',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     siteId: siteIndexMap['Greenhouse (Shelf 2)'],
     source: 'Natalie John',
   },
   {
     name: 'Anthurium misturatum',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-10-12'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Ecuagenera',
@@ -67,34 +61,34 @@ const plantData = [
   },
   {
     name: 'Anthurium Titanium',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Greenhouse (Shelf 3)'],
     source: 'Ecuagenera',
   },
   {
     name: 'Anthurium warocqueanum esmeraldense',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     siteId: siteIndexMap['Greenhouse (Shelf 3)'],
     source: 'Ecuagenera',
   },
   {
     name: 'Begonia maculata',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
   },
   {
     name: 'Bird of Paradise',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Copilot',
   },
   {
     name: 'Cebu Blue Pothos',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Bedroom (Right Window)'],
     propagation: false,
@@ -105,7 +99,7 @@ const plantData = [
   },
   {
     name: 'Chameleon ZZ Plant',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     updatedAt: new Date('2023-02-18'),
     siteId: siteIndexMap['Bedroom (Right Window)'],
     propagation: false,
@@ -116,7 +110,7 @@ const plantData = [
   },
   {
     name: 'Epipremnum pinnatum albo',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Bedroom (Right Window)'],
     propagation: false,
@@ -127,7 +121,7 @@ const plantData = [
   },
   {
     name: 'Florida Green cutting',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     propagation: true,
@@ -135,7 +129,7 @@ const plantData = [
   },
   {
     name: 'Golden pothos',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     siteId: siteIndexMap['Bedroom (Dresser)'],
     propagation: false,
     potSize: 8,
@@ -145,7 +139,7 @@ const plantData = [
   },
   {
     name: 'Harlequin pothos',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2023-02-13'),
     siteId: siteIndexMap['Bedroom (Left Window)'],
     propagation: false,
@@ -156,7 +150,7 @@ const plantData = [
   },
   {
     name: 'Hoya krimson queen',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     updatedAt: new Date('2022-09-30'),
     siteId: siteIndexMap['Greenhouse (Shelf 1)'],
     potSize: 4,
@@ -166,7 +160,7 @@ const plantData = [
   },
   {
     name: 'Hoya lacunosa',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     siteId: siteIndexMap['Greenhouse (Shelf 1)'],
     propagation: false,
     potSize: 2,
@@ -176,7 +170,7 @@ const plantData = [
   },
   {
     name: 'Jade plant',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     siteId: siteIndexMap['Living Room (Right Window)'],
     propagation: false,
     potSize: 3.25,
@@ -186,13 +180,13 @@ const plantData = [
   },
   {
     name: 'Jade plant 2',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     siteId: siteIndexMap['Living Room (Right Window)'],
     source: 'Propagation',
   },
   {
     name: 'Lemon lime philodendron',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Bedroom (Left Window)'],
     propagation: false,
     potSize: 4,
@@ -202,13 +196,13 @@ const plantData = [
   },
   {
     name: 'Monstera adansonii',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Left Window)'],
   },
   {
     name: 'Monstera Albo',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Greenhouse (Shelf 1)'],
     propagation: false,
@@ -219,7 +213,7 @@ const plantData = [
   },
   {
     name: 'Monstera deliciosa',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     propagation: false,
@@ -230,7 +224,7 @@ const plantData = [
   },
   {
     name: 'Monstera peru',
-    health: healthMap['Poor'],
+    health: HEALTH_LABELS['Poor'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Shelf 3)'],
     potSize: 6,
@@ -240,7 +234,7 @@ const plantData = [
   },
   {
     name: 'Monstera Thai Constellation',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2024-04-04'),
     siteId: siteIndexMap['Living Room (Shelf 1)'],
     potSize: 7,
@@ -250,7 +244,7 @@ const plantData = [
   },
   {
     name: 'Myrtillocactus geometrizans Fukurokuryuzinboku',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Left Window)'],
     source: 'Da Hing',
@@ -258,14 +252,14 @@ const plantData = [
   },
   {
     name: 'Nerve Plant',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
   },
   {
     name: 'Peperomia obtusifolia',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
@@ -273,28 +267,28 @@ const plantData = [
   },
   {
     name: 'Peperomia tetragona',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
   },
   {
     name: 'Peperomia tetraphylla "Hope"',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-03-28'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
   },
   {
     name: 'Peperomia tetraphylla?',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Alanna',
   },
   {
     name: 'Philodendron 69686',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-08-29'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     potSize: 4,
@@ -305,7 +299,7 @@ const plantData = [
   },
   {
     name: 'Philodendron bicolor',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2025-09-28'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Ecuagenera',
@@ -314,7 +308,7 @@ const plantData = [
   },
   {
     name: 'Philodendron billietiae',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2024-04-04'),
     siteId: siteIndexMap['Living Room (Shelf 2)'],
     potSize: 4,
@@ -325,7 +319,7 @@ const plantData = [
   },
   {
     name: 'Philodendron brasil',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Bedroom (Left Window)'],
     propagation: false,
     potSize: 4,
@@ -335,7 +329,7 @@ const plantData = [
   },
   {
     name: 'Philodendron camposportoanum cuttings',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     propagation: false,
@@ -346,19 +340,19 @@ const plantData = [
   },
   {
     name: 'Philodendron esmeraldense',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     siteId: siteIndexMap['Living Room (Shelf 2)'],
     source: 'Ecuagenera',
   },
   {
     name: 'Philodendron Florida Green',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Living Room (Shelf 3)'],
     source: 'Plant Corner',
   },
   {
     name: 'Philodendron gloriosum zebra',
-    health: healthMap['Poor'],
+    health: HEALTH_LABELS['Poor'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Greenhouse (Shelf 3)'],
     potSize: 6,
@@ -368,7 +362,7 @@ const plantData = [
   },
   {
     name: "Philodendron Mccolley's Finale",
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     potSize: 6,
@@ -378,13 +372,13 @@ const plantData = [
   },
   {
     name: 'Philodendron Pink Glory',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Living Room (Indirect)'],
     source: 'Ecuagenera',
   },
   {
     name: 'Philodendron pink princess',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Shelf 3)'],
     propagation: false,
@@ -395,7 +389,7 @@ const plantData = [
   },
   {
     name: 'Philodendron rojo congo',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Living Room (Shelf 1)'],
     propagation: false,
     potSize: 6,
@@ -405,7 +399,7 @@ const plantData = [
   },
   {
     name: 'Philodendron silver sword',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2023-08-07'),
     siteId: siteIndexMap['Bedroom (Left Window)'],
     propagation: false,
@@ -416,7 +410,7 @@ const plantData = [
   },
   {
     name: 'Philodendron squamicaule pink',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2025-09-28'),
     siteId: siteIndexMap['Greenhouse (Shelf 2)'],
     source: 'Ecuagenera',
@@ -425,13 +419,13 @@ const plantData = [
   },
   {
     name: 'Philodendron white knight',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Greenhouse (Shelf 2)'],
     source: 'Da Hing',
   },
   {
     name: "Pothos N'joy",
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2023-08-07'),
     siteId: siteIndexMap['Bedroom (Left Window)'],
     propagation: false,
@@ -442,7 +436,7 @@ const plantData = [
   },
   {
     name: 'Raven ZZ',
-    health: healthMap['Great'],
+    health: HEALTH_LABELS['Great'],
     updatedAt: new Date('2023-01-04'),
     siteId: siteIndexMap['Bedroom (Right Window)'],
     propagation: false,
@@ -453,7 +447,7 @@ const plantData = [
   },
   {
     name: 'Rubber Plant',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     siteId: siteIndexMap['Bedroom (Dresser)'],
     propagation: false,
     potSize: 6,
@@ -463,20 +457,20 @@ const plantData = [
   },
   {
     name: 'Rubber Plant 2',
-    health: healthMap['Fair'],
+    health: HEALTH_LABELS['Fair'],
     updatedAt: new Date('2026-02-16'),
     siteId: siteIndexMap['Bedroom (Dresser)'],
   },
   {
     name: 'Staghorn fern',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Left Window)'],
     source: 'Plant Corner',
   },
   {
     name: 'Syngonium albo',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     siteId: siteIndexMap['Living Room (Shelf 4)'],
     propagation: false,
     potSize: 4,
@@ -486,7 +480,7 @@ const plantData = [
   },
   {
     name: 'ZZ Plant',
-    health: healthMap['Good'],
+    health: HEALTH_LABELS['Good'],
     updatedAt: new Date('2025-09-15'),
     siteId: siteIndexMap['Living Room (Indirect)'],
     propagation: false,

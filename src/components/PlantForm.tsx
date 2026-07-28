@@ -1,5 +1,6 @@
 import Form from 'next/form'
 import { PotMaterial, Substrate, Plant, Site, Species } from '../../generated/prisma/client'
+import { HEALTH_LABELS, healthValueToLabel } from '@/lib/health'
 
 export default function PlantForm({
   sites,
@@ -77,13 +78,19 @@ export default function PlantForm({
         <label htmlFor="health" className="mb-2 block text-lg">
           Health
         </label>
-        <input
-          type="number"
+        <select
           id="health"
           name="health"
           className="w-full rounded-lg border px-4 py-2"
-          defaultValue={defaultValues?.health ?? ''}
-        />
+          defaultValue={healthValueToLabel(defaultValues?.health)}
+        >
+          <option value="">None</option>
+          {Object.keys(HEALTH_LABELS).map((label) => (
+            <option key={label} value={label}>
+              {label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

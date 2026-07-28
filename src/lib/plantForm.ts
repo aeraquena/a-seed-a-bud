@@ -1,4 +1,5 @@
 import { Prisma, PotMaterial, Substrate } from '../../generated/prisma/client'
+import { HEALTH_LABELS } from './health'
 
 export function parsePlantFormData(formData: FormData): Prisma.PlantUncheckedCreateInput {
   const name = formData.get('name') as string
@@ -16,7 +17,7 @@ export function parsePlantFormData(formData: FormData): Prisma.PlantUncheckedCre
     name,
     siteId: siteId ? Number(siteId) : null,
     speciesId: speciesId ? Number(speciesId) : null,
-    health: health ? Number(health) : null,
+    health: health ? HEALTH_LABELS[health] : null,
     propagation: formData.get('propagation') === 'on',
     potSize: potSize ? Number(potSize) : null,
     potMaterial: potMaterial ? (potMaterial as PotMaterial) : null,
