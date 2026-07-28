@@ -25,11 +25,11 @@ export default async function Post({
   }
 
   return (
-    <div className="-mt-16 flex min-h-screen flex-col items-center justify-center bg-gray-50">
+    <div className="mt-8 flex min-h-screen flex-col items-center justify-center bg-gray-50">
       <h1 className="mb-8 text-4xl font-bold text-[#333333]">{plant.name}</h1>
       <Link
         href={`/plants/${plant.id}/edit`}
-        className="mb-8 rounded-lg bg-brand-green px-4 py-2 text-white hover:bg-brand-green-hover"
+        className="bg-brand-green hover:bg-brand-green-hover mb-8 rounded-lg px-4 py-2 text-white"
       >
         Edit Plant
       </Link>
