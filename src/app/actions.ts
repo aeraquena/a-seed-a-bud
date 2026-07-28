@@ -30,3 +30,12 @@ export async function undoWaterPlant(eventId: number): Promise<void> {
   await prisma.event.delete({ where: { id: eventId } })
   revalidatePath('/')
 }
+
+export async function updatePlantHealth(
+  plantId: number,
+  health: number | null
+): Promise<void> {
+  await prisma.plant.update({ where: { id: plantId }, data: { health } })
+  revalidatePath('/')
+  revalidatePath(`/plants/${plantId}`)
+}

@@ -1,6 +1,8 @@
 import prisma from '@/../lib/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { updatePlantHealth } from '@/app/actions'
+import { HealthSelect } from '@/components/HealthSelect'
 
 export default async function Post({
   params,
@@ -14,6 +16,7 @@ export default async function Post({
       events: {
         orderBy: { date: 'desc' },
       },
+      site: true,
     },
   })
 
@@ -34,7 +37,7 @@ export default async function Post({
         Created on{' '}
         {new Intl.DateTimeFormat('en-US', {
           year: 'numeric',
-          month: '2-digit',
+          month: 'numeric',
           day: '2-digit',
         }).format(plant.createdAt)}
       </p>
@@ -42,17 +45,28 @@ export default async function Post({
         Updated on{' '}
         {new Intl.DateTimeFormat('en-US', {
           year: 'numeric',
-          month: '2-digit',
+          month: 'numeric',
           day: '2-digit',
         }).format(plant.updatedAt)}
       </p>
+      <p className="flex items-center gap-2">
+        Health:{' '}
+        <HealthSelect
+          plantId={plant.id}
+          health={plant.health}
+          updatePlantHealth={updatePlantHealth}
+        />
+      </p>
+      {plant.site && <p>Site: {plant.site.name}</p>}
+      {plant.propagation && <p>Propagation</p>}
+      {!plant.alive && <p>Dead</p>}
       <h2 className="m-8 text-2xl font-bold text-[#333333]">Waterings</h2>
       <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
         {plant.events.map((event) => (
           <li key={event.id} className="mb-2">
             {new Intl.DateTimeFormat('en-US', {
               year: 'numeric',
-              month: '2-digit',
+              month: 'numeric',
               day: '2-digit',
             }).format(event.date)}
           </li>
