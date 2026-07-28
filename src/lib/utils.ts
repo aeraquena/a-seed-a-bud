@@ -11,17 +11,19 @@ export function daysAgo(lastWatered: Date): number {
       timeZone: 'America/New_York',
       year: 'numeric',
       month: '2-digit',
-      day: '2-digit',
+      day: 'numeric',
     }).formatToParts(d)
-    const y = Number(parts.find(p => p.type === 'year')!.value)
-    const m = Number(parts.find(p => p.type === 'month')!.value)
-    const day = Number(parts.find(p => p.type === 'day')!.value)
+    const y = Number(parts.find((p) => p.type === 'year')!.value)
+    const m = Number(parts.find((p) => p.type === 'month')!.value)
+    const day = Number(parts.find((p) => p.type === 'day')!.value)
     return new Date(y, m - 1, day)
   }
 
   const today = toETCalendarDate(new Date())
   const watered = toETCalendarDate(lastWatered)
-  return Math.round((today.getTime() - watered.getTime()) / (1000 * 60 * 60 * 24))
+  return Math.round(
+    (today.getTime() - watered.getTime()) / (1000 * 60 * 60 * 24)
+  )
 }
 
 export function getWateringColor(lastWatered: Date | null): string {

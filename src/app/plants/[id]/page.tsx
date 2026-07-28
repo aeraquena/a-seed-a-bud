@@ -33,45 +33,69 @@ export default async function Post({
       >
         Edit Plant
       </Link>
-      <p>
-        Created on{' '}
-        {new Intl.DateTimeFormat('en-US', {
-          year: 'numeric',
-          month: 'numeric',
-          day: '2-digit',
-        }).format(plant.createdAt)}
-      </p>
-      <p>
-        Updated on{' '}
-        {new Intl.DateTimeFormat('en-US', {
-          year: 'numeric',
-          month: 'numeric',
-          day: '2-digit',
-        }).format(plant.updatedAt)}
-      </p>
-      <p className="flex items-center gap-2">
-        Health:{' '}
-        <HealthSelect
-          plantId={plant.id}
-          health={plant.health}
-          updatePlantHealth={updatePlantHealth}
-        />
-      </p>
-      {plant.site && <p>Site: {plant.site.name}</p>}
-      {plant.propagation && <p>Propagation</p>}
-      {!plant.alive && <p>Dead</p>}
-      <h2 className="m-8 text-2xl font-bold text-[#333333]">Waterings</h2>
-      <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
-        {plant.events.map((event) => (
-          <li key={event.id} className="mb-2">
+      <div className="mx-auto w-full max-w-98.25 px-4 text-left">
+        <p className="flex items-center justify-between gap-2">
+          <strong>Health</strong>
+          <HealthSelect
+            plantId={plant.id}
+            health={plant.health}
+            updatePlantHealth={updatePlantHealth}
+          />
+        </p>
+        {plant.site && (
+          <p className="flex items-center justify-between gap-2">
+            <strong>Site</strong>
+            <span>{plant.site.name}</span>
+          </p>
+        )}
+        {plant.propagation && (
+          <p className="flex items-center justify-between gap-2">
+            <strong>Propagation</strong>
+            <span>Yes</span>
+          </p>
+        )}
+        {!plant.alive && (
+          <p className="flex items-center justify-between gap-2">
+            <strong>Dead</strong>
+            <span>Yes</span>
+          </p>
+        )}
+
+        <p className="mt-4 flex items-center justify-between gap-2">
+          <strong>Created</strong>
+          <span>
             {new Intl.DateTimeFormat('en-US', {
               year: 'numeric',
               month: 'numeric',
-              day: '2-digit',
-            }).format(event.date)}
-          </li>
-        ))}
-      </ul>
+              day: 'numeric',
+            }).format(plant.createdAt)}
+          </span>
+        </p>
+        <p className="flex items-center justify-between gap-2">
+          <strong>Updated</strong>
+          <span>
+            {new Intl.DateTimeFormat('en-US', {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            }).format(plant.updatedAt)}
+          </span>
+        </p>
+        <h2 className="m-8 text-center text-2xl font-bold text-[#333333]">
+          Waterings
+        </h2>
+        <ul className="list-inside font-[family-name:var(--font-geist-sans)]">
+          {plant.events.map((event) => (
+            <li key={event.id} className="mb-2">
+              {new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              }).format(event.date)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
