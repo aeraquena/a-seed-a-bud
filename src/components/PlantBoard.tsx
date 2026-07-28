@@ -49,12 +49,14 @@ function SiteDropZone({
   activeSiteId,
   overId,
   waterPlant,
+  undoWaterPlant,
 }: {
   site: SiteWithPlants
   activeId: UniqueIdentifier | null
   activeSiteId: number | null
   overId: UniqueIdentifier | null
-  waterPlant: (formData: FormData) => Promise<void>
+  waterPlant: (plantId: number) => Promise<{ eventId: number }>
+  undoWaterPlant: (eventId: number) => Promise<void>
 }) {
   const { setNodeRef } = useDroppable({ id: `site-${site.id}` })
 
@@ -94,7 +96,11 @@ function SiteDropZone({
             return (
               <Fragment key={plant.id}>
                 {showAbove && <DropLine />}
-                <SortablePlantRow plant={plant} waterPlant={waterPlant} />
+                <SortablePlantRow
+                  plant={plant}
+                  waterPlant={waterPlant}
+                  undoWaterPlant={undoWaterPlant}
+                />
                 {showBelow && <DropLine />}
               </Fragment>
             )
@@ -109,10 +115,16 @@ function SiteDropZone({
 type Props = {
   initialSites: SiteWithPlants[]
   reorderPlants: (updates: PlantUpdate[]) => Promise<void>
-  waterPlant: (formData: FormData) => Promise<void>
+  waterPlant: (plantId: number) => Promise<{ eventId: number }>
+  undoWaterPlant: (eventId: number) => Promise<void>
 }
 
-export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
+export function PlantBoard({
+  initialSites,
+  reorderPlants,
+  waterPlant,
+  undoWaterPlant,
+}: Props) {
   const [sites, setSites] = useState<SiteWithPlants[]>(() =>
     initialSites.map(normalizeSite)
   )
@@ -233,6 +245,7 @@ export function PlantBoard({ initialSites, reorderPlants, waterPlant }: Props) {
           activeSiteId={activeSiteId}
           overId={overId}
           waterPlant={waterPlant}
+          undoWaterPlant={undoWaterPlant}
         />
       ))}
       <DragOverlay>

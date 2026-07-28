@@ -2,34 +2,10 @@ export const dynamic = 'force-dynamic'
 
 import prisma from '@/../lib/prisma'
 import Link from 'next/link'
-import { revalidatePath } from 'next/cache'
 import { PlantBoard } from '@/components/PlantBoard'
-import { reorderPlants } from '@/app/actions'
+import { reorderPlants, waterPlant, undoWaterPlant } from '@/app/actions'
 
 export default async function Home() {
-  async function waterPlant(formData: FormData) {
-    'use server'
-
-    const plantId = Number(formData.get('plantId'))
-    const daysAgoStr = formData.get('daysAgo') as string
-    const daysAgo = daysAgoStr !== '' ? Number(daysAgoStr) : null
-
-    let date: Date | undefined
-    if (daysAgo !== null && !isNaN(daysAgo)) {
-      date = new Date()
-      date.setDate(date.getDate() - daysAgo)
-    }
-
-    await prisma.event.create({
-      data: {
-        plantId,
-        ...(date && { date }),
-      },
-    })
-
-    revalidatePath('/')
-  }
-
   const sites = await prisma.site.findMany({
     orderBy: { index: 'asc' },
     include: {
@@ -41,6 +17,7 @@ export default async function Home() {
             orderBy: { date: 'desc' },
             take: 1,
             select: {
+              id: true,
               date: true,
             },
           },
@@ -56,6 +33,7 @@ export default async function Home() {
           initialSites={sites}
           reorderPlants={reorderPlants}
           waterPlant={waterPlant}
+          undoWaterPlant={undoWaterPlant}
         />
       </div>
       <Link href={{ pathname: '/plants/new ' }}>

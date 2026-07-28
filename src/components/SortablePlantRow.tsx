@@ -1,22 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import Link from 'next/link'
 import type { PlantWithEvents } from '@/lib/types'
 import { daysAgo, getWateringColor } from '@/lib/utils'
-import { Droplet } from 'lucide-react'
+import { Droplet, RotateCcw } from 'lucide-react'
 
 type Props = {
   plant: PlantWithEvents
-  waterPlant: (formData: FormData) => Promise<void>
+  waterPlant: (plantId: number) => Promise<{ eventId: number }>
+  undoWaterPlant: (eventId: number) => Promise<void>
 }
 
-export function SortablePlantRow({ plant, waterPlant }: Props) {
-  const [wateredToday, setWateredToday] = useState(
-    plant.events[0] ? daysAgo(plant.events[0].date) === 0 : false
+export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
+  const latestEvent = plant.events[0]
+  const [todayEventId, setTodayEventId] = useState<number | null>(
+    latestEvent && daysAgo(latestEvent.date) === 0 ? latestEvent.id : null
   )
+  const [isPending, startTransition] = useTransition()
+  const wateredToday = todayEventId !== null
+
+  function handleClick() {
+    startTransition(async () => {
+      if (todayEventId !== null) {
+        const eventId = todayEventId
+        setTodayEventId(null)
+        await undoWaterPlant(eventId)
+      } else {
+        const { eventId } = await waterPlant(plant.id)
+        setTodayEventId(eventId)
+      }
+    })
+  }
 
   const {
     attributes,
@@ -45,11 +62,7 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
       >
         ⠿
       </span>
-      <form
-        action={waterPlant}
-        onSubmit={() => setWateredToday(true)}
-        className="flex flex-1 items-center justify-between gap-2"
-      >
+      <div className="flex flex-1 items-center justify-between gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <div
             style={{
@@ -78,16 +91,19 @@ export function SortablePlantRow({ plant, waterPlant }: Props) {
             </div>
           </Link>
         </div>
-        <input type="hidden" name="plantId" value={plant.id} />
-        {/* <input type="number" name="daysAgo" min="0" placeholder="days ago" className="m-4 w-24 rounded border px-2 py-1" /> */}
         <button
-          type="submit"
-          disabled={wateredToday}
-          className={`flex shrink-0 items-center justify-center rounded-full p-2 transition duration-150 ${wateredToday ? 'cursor-not-allowed bg-gray-300' : 'bg-green-600 hover:bg-green-700'}`}
+          type="button"
+          onClick={handleClick}
+          disabled={isPending}
+          className={`flex shrink-0 items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
         >
-          <Droplet color="white" size={24} />
+          {wateredToday ? (
+            <RotateCcw color="white" size={24} />
+          ) : (
+            <Droplet color="white" size={24} />
+          )}
         </button>
-      </form>
+      </div>
     </li>
   )
 }

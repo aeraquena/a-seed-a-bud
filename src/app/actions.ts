@@ -17,3 +17,16 @@ export async function reorderPlants(updates: PlantUpdate[]): Promise<void> {
   )
   revalidatePath('/')
 }
+
+export async function waterPlant(
+  plantId: number
+): Promise<{ eventId: number }> {
+  const event = await prisma.event.create({ data: { plantId } })
+  revalidatePath('/')
+  return { eventId: event.id }
+}
+
+export async function undoWaterPlant(eventId: number): Promise<void> {
+  await prisma.event.delete({ where: { id: eventId } })
+  revalidatePath('/')
+}
