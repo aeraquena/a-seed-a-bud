@@ -31,7 +31,7 @@ export default async function Post({
       </h1>
       <Link
         href={`/plants/${plant.id}/edit`}
-        className="bg-brand-green hover:bg-brand-green-hover mb-8 rounded-lg px-4 py-2 text-white"
+        className="bg-brand-green hover:bg-brand-green-hover mb-8 rounded-lg px-4 py-2 text-center text-white"
       >
         Edit Plant
       </Link>
