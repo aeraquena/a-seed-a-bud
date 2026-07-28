@@ -57,6 +57,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
       <span
         {...attributes}
         {...listeners}
+        suppressHydrationWarning
         className="mr-2 flex cursor-grab touch-none items-center text-gray-400 select-none active:cursor-grabbing"
         aria-label="Drag to reorder"
       >
@@ -95,7 +96,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
           type="button"
           onClick={handleClick}
           disabled={isPending}
-          className={`flex shrink-0 items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
+          className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
         >
           {wateredToday ? (
             <RotateCcw color="white" size={24} />
