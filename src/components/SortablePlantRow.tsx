@@ -51,7 +51,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
   }
 
   const daysAgoWatered = plant.events[0] ? daysAgo(plant.events[0].date) : 0
-  const hideWaterButton = plant.propagation && plant.substrate === 'WATER'
+  const hideWaterButton = plant.substrate === 'WATER'
 
   return (
     <li ref={setNodeRef} style={style} className="mb-2 flex w-84 select-none">
