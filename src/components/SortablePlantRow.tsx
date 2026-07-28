@@ -51,6 +51,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
   }
 
   const daysAgoWatered = plant.events[0] ? daysAgo(plant.events[0].date) : 0
+  const hideWaterButton = plant.propagation && plant.substrate === 'WATER'
 
   return (
     <li ref={setNodeRef} style={style} className="mb-2 flex w-84 select-none">
@@ -92,18 +93,20 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
             </div>
           </Link>
         </div>
-        <button
-          type="button"
-          onClick={handleClick}
-          disabled={isPending}
-          className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
-        >
-          {wateredToday ? (
-            <RotateCcw color="white" size={24} />
-          ) : (
-            <Droplet color="white" size={24} />
-          )}
-        </button>
+        {!hideWaterButton && (
+          <button
+            type="button"
+            onClick={handleClick}
+            disabled={isPending}
+            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
+          >
+            {wateredToday ? (
+              <RotateCcw color="white" size={24} />
+            ) : (
+              <Droplet color="white" size={24} />
+            )}
+          </button>
+        )}
       </div>
     </li>
   )
