@@ -212,7 +212,7 @@ export default function PlantForm({
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-green-600 py-3 text-white hover:bg-green-700"
+        className="w-full rounded-lg bg-brand-green py-3 text-white hover:bg-brand-green-hover"
       >
         {submitLabel}
       </button>

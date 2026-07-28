@@ -37,7 +37,7 @@ export default async function Home() {
         />
       </div>
       <Link href={{ pathname: '/plants/new ' }}>
-        <button className="m-4 rounded bg-green-600 px-4 py-2 font-semibold text-white transition duration-150 hover:bg-green-700">
+        <button className="m-4 rounded bg-brand-green px-4 py-2 font-semibold text-white transition duration-150 hover:bg-brand-green-hover">
           + Add new plant
         </button>
       </Link>

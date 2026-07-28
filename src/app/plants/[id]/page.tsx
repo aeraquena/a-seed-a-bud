@@ -29,7 +29,7 @@ export default async function Post({
       <h1 className="mb-8 text-4xl font-bold text-[#333333]">{plant.name}</h1>
       <Link
         href={`/plants/${plant.id}/edit`}
-        className="mb-8 rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+        className="mb-8 rounded-lg bg-brand-green px-4 py-2 text-white hover:bg-brand-green-hover"
       >
         Edit Plant
       </Link>

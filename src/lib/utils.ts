@@ -42,3 +42,15 @@ export function getWateringColor(lastWatered: Date | null): string {
 
   return `rgb(${r}, ${g}, ${b})`
 }
+
+const HEALTH_COLORS: Record<number, string> = {
+  1: '#FFB347',
+  2: '#FDFD96',
+  3: '#79DE79',
+  4: '#0CC078',
+}
+
+export function getHealthColor(health: number | null | undefined): string {
+  if (health == null) return 'rgb(235, 235, 235)'
+  return HEALTH_COLORS[health] ?? 'rgb(235, 235, 235)'
+}

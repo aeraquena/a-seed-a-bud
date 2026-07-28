@@ -5,7 +5,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import Link from 'next/link'
 import type { PlantWithEvents } from '@/lib/types'
-import { daysAgo, getWateringColor } from '@/lib/utils'
+import { daysAgo, getHealthColor } from '@/lib/utils'
 import { Droplet, RotateCcw } from 'lucide-react'
 
 type Props = {
@@ -68,9 +68,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <div
             style={{
-              backgroundColor: wateredToday
-                ? getWateringColor(new Date())
-                : getWateringColor(plant.events[0]?.date ?? null),
+              backgroundColor: getHealthColor(plant.health),
               width: '20px',
               height: '20px',
               borderRadius: '50%',
@@ -98,7 +96,7 @@ export function SortablePlantRow({ plant, waterPlant, undoWaterPlant }: Props) {
             type="button"
             onClick={handleClick}
             disabled={isPending}
-            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-green-600 hover:bg-green-700'}`}
+            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full p-2 transition duration-150 disabled:cursor-not-allowed disabled:opacity-70 ${wateredToday ? 'bg-gray-400 hover:bg-gray-500' : 'bg-brand-green hover:bg-brand-green-hover'}`}
           >
             {wateredToday ? (
               <RotateCcw color="white" size={24} />
