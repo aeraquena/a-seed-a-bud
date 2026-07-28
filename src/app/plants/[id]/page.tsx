@@ -45,13 +45,13 @@ export default async function Post({
           />
         </p>
         {plant.site && (
-          <p className="flex items-center justify-between gap-2">
+          <p className="mt-2 flex items-center justify-between gap-2">
             <strong>Site</strong>
             <span>{plant.site.name}</span>
           </p>
         )}
         {plant.propagation && (
-          <p className="flex items-center justify-between gap-2">
+          <p className="mt-2 flex items-center justify-between gap-2">
             <strong>Propagation</strong>
             <span>Yes</span>
           </p>
@@ -63,7 +63,7 @@ export default async function Post({
           </p>
         )}
 
-        <p className="mt-4 flex items-center justify-between gap-2">
+        <p className="mt-2 flex items-center justify-between gap-2">
           <strong>Created</strong>
           <span>
             {new Intl.DateTimeFormat('en-US', {
@@ -73,7 +73,7 @@ export default async function Post({
             }).format(plant.createdAt)}
           </span>
         </p>
-        <p className="flex items-center justify-between gap-2">
+        <p className="mt-2 flex items-center justify-between gap-2">
           <strong>Updated</strong>
           <span>
             {new Intl.DateTimeFormat('en-US', {
